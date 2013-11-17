@@ -24,17 +24,15 @@
 	$success = TRUE;	
 	$query = "INSERT INTO quiz (Title, Question, ClassId) VALUES ('{$quiz_title}', '{$question}', '{$class_id}')";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	$success = ($success && $result);
 	$query = "DELETE FROM response WHERE ClassId=$class_id";
 	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	$success = ($success && $result);
-		echo $success;
+	echo $success;
 	
 	$result->free();	
 	
 	// CLOSE CONNECTION
 	$mysqli->close();
-	return;
+	exit(0);
   }
   
   //OpenQuiz

@@ -12,26 +12,31 @@
 		printf("Connect failed: %s\n", mysqli_connect_error());
 		exit();
 	}
+	$mysqli->autocommit($link, FALSE);
+
 	
-	if(isset($_POST['ClassId'])&&isset($_POST['Response'])){
-		$class_id = filter_var(@$_POST['ClassId'], FILTER_SANITIZE_NUMBER_INT);
-		$std_resp = filter_var($_POST['Response'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+	if(isset($_GET['ClassId'])&&isset($_GET['Response'])){
+		$class_id = filter_var(@$_GET['ClassId'], FILTER_SANITIZE_NUMBER_INT);
+		$std_resp = filter_var($_GET['Response'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 	} else {
 		//Bad Request
 		printf("Connect failed: %s\n", mysqli_connect_error());
 		exit(406);	
 	}
 	
-	if(isset($_POST['Phone'])){
+	if(isset($_GET['Phone'])){
 		//Comes from twillio
-		$std_num = filter_var(@$_POST['Phone'], FILTER_SANITIZE_NUMBER_INT);
-		$query = "INSERT INTO response (ClassId, StudentId, Response) SELECT {$class_id}, student.StudentId, {$std_resp} FROM student WHERE student.PhoneNumber = {$std_num}";
+		$std_num = filter_var(@$_GET['Phone'], FILTER_SANITIZE_NUMBER_INT);
+		$query = "INSERT INTO response (StudentId, ClassId, Response) SELECT student.StudentId, {$class_id}, {$std_resp} FROM hackdukedatabase.student WHERE student.PhoneNumber = {$std_num}";
 
+		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 		
-	} elseif (isset($_POST['Email'])){
+	} elseif (isset($_GET['Email'])){
 		//SendGrid
-		$std_email = filter_var(@$_POST['Email'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-		$query = "INSERT INTO response (ClassId, StudentId, Response) SELECT {$class_id}, student.StudentId, {$std_resp} FROM student WHERE student.Email = {$std_email}";
+		$std_email = filter_var(@$_GET['Email'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$query = "INSERT INTO response (StudentId, ClassId, Response) SELECT student.StudentId, {$class_id}, {$std_resp} FROM hackdukedatabase.student WHERE student.Email = {$std_email}";
+		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+
 	} else{
 		//Bad request
 		exit(406);

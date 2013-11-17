@@ -26,7 +26,7 @@
   echo "Creating request<br>";
 
   try {
-    //$request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body");
+    $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body");
     echo "Sending request<br>";
     //$response = $request->send();
     echo "Request sent to $request->getUrl()<br>";

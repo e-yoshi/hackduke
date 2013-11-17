@@ -30,7 +30,7 @@ error_reporting(E_ALL);
   $result = mysqli_query($mysqlCon, $query);
   $rows = mysqli_fetch_array($result);
   $std_id = $rows[0];
-  if (!is_null($std_id)) {
+  if ($std_id==TRUE) {
     $query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' FROM hackdukedatabase.classlog WHERE classlog.StudentId='{$std_id}' ORDER BY TimeStarted DESC LIMIT 1";
     $result = mysqli_query($mysqlCon, $query);
     if (!is_null($result)) {

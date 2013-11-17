@@ -38,10 +38,10 @@ error_reporting(E_ALL);
   //$query = "INSERT INTO quiz (Question, ClassId) VALUES ('$question', '$classId')";
   //$result = mysqli_query($mysqlCon, $query);
   //$result->free();
-  $query = "DELETE FROM hackdukedatabase.response";
+  $query = "DELETE * FROM hackdukedatabase.response";
   $result = mysqli_query($mysqlCon, $query);
-  @$result->free();
-  echo "True";
+  $result->free();
+  echo TRUE;
   //
 
   // send text messages

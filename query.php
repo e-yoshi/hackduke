@@ -36,7 +36,29 @@
 
   // GetResponse: returns comma separated student responses
   if ($queryType == 'GetResponse') {
-
+	  $teacher_name = @$_GET['ClassId'];
+	$query = "SELECT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}'";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		$rows = array();
+		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+			 array_push($rows, $row);
+		}
+		$str = implode (",", $rows);
+		echo $str;
+		$result->free();
+		// CLOSE CONNECTION
+		$mysqli->close();
+		http_status_code(202);
+		exit(1);
+		return;
+	}
+	   
+	$result->free();
+	// CLOSE CONNECTION
+	$mysqli->close();
+	http_status_code(406);
+	exit(1);
   }
 
   // GetClasses: returns comma separated class ids from teacher name
@@ -52,7 +74,11 @@
 		$str = implode (",", $rows);
 		echo $str;
 		http_status_code(202);
+		$result->free();
+	 	// CLOSE CONNECTION
+	 	$mysqli->close();
 		exit(1);
+		return;
 	}
 	   
 	$result->free();

@@ -54,5 +54,4 @@ error_reporting(E_ALL);
     echo "Sent message to student $id at $phoneNumber<br>";
   }
   
-  exit(0);
 ?>

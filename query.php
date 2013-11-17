@@ -45,7 +45,7 @@
 	$query = "SELECT class.ClassId FROM hackdukedatabase.class WHERE TeacherName='{$teacher_name}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
-		$rows = $result->fetch_array(MYSQLI_NUM);
+		$rows = $result->fetch_row();
 		$str = implode (", ", $rows);
 		echo $str;
 		http_status_code(202);

@@ -1,6 +1,3 @@
-<html>
-<title>Test twilio</title>
-<body>
 <?php
 
   require "Services/Twilio.php";
@@ -15,6 +12,3 @@
   }
 
 ?>
-
-</body>
-</html>

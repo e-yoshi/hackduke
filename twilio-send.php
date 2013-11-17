@@ -1,6 +1,6 @@
 <?php
 
-  // get GET params
+  // get POST params
   $classId = $_GET['ClassId'];
   echo "Class id is $classId";
   echo "<br>";
@@ -37,7 +37,8 @@
   foreach ($studentIdArray as $id) {
     echo "Getting phone for student $id<br>";
     $phone = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT PhoneNumber FROM student WHERE StudentId=$id"));
-    $sms = $client->account->messages->sendMessage($twilioPhone, $phone, "Sup! You owe Jimmy Wei \$20! :)");
+    $sms = $client->account->messages->sendMessage($twilioPhone, $phone, "Hello from Inquizio! Your instructor has requested a response;
+                                                                              please reply to this text with the letter corresponding to your answer!");
     echo "Sent message to student $id at $phone<br>";
   }
 

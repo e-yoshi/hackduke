@@ -92,7 +92,7 @@
   // GetStudents: returns comma separated student ids given a class id
   if ($queryType == 'GetStudents') {
 	  $class_id = @$_GET['ClassId'];
-	$query = "SELECT class.StudentId FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
+	$query = "SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		$row = mysqli_fetch_array($result, MYSQLI_NUM);
@@ -111,14 +111,134 @@
 	http_status_code(406);
 	exit(1);
   }
-
-  // SetClasses: takes in comma separated list of class ids and reconciles classes in class table with list
-  if ($queryType == 'SetClasses') {
-
+  
+  
+  // GetStudents: returns comma separated student ids given a class id
+  if ($queryType == 'GetStudentsWithNames') {
+	  $class_id = @$_GET['ClassId'];
+	$query = "SELECT student.StudentId, student.FirstName FROM hackdukedatabase.class WHERE student.StudentId IN (SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}')";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		$rows = array();
+		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+			 array_push($rows, $row[1]);
+			 array_push($rows, $row[0]);
+		}
+		$str = implode (",", $rows);
+		echo $str;
+		http_status_code(202);
+		$result->free();
+	 	// CLOSE CONNECTION
+	 	$mysqli->close();
+		exit(1);
+		return;
+	}
+	   
+	$result->free();
+	// CLOSE CONNECTION
+	$mysqli->close();
+	http_status_code(406);
+	exit(1);
+  }
+  
+  if ($queryType == 'MakeStudent') {
+	$std_first_name =  @$_GET['FirstName'];
+	$std_last_name =  @$_GET['LastName'];
+	$std_email =  @$_GET['Email'];
+	$std_phone =  @$_GET['Phone'];
+	$query = "INSERT INTO hackdukedatabase.student FirstName, LastName, Email, Phone VALUES '{$std_first_name}', '{$std_last_name}', '{$std_email}', '{$std_phone}'";
+   	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		echo 'True';
+		$result->free();
+	 	// CLOSE CONNECTION
+	 	$mysqli->close();
+		exit(1);
+		return;
+	}
+	   
+	$result->free();
+	// CLOSE CONNECTION
+	$mysqli->close();
+	http_status_code(406);
+	exit(1);
+  }
+  
+   // SetStudents: takes in comma separated list of student ids and updates student list for given class id
+  if ($queryType == 'SetStudents') {
+	$class_id = @$_GET['ClassId'];
+	$std_list = @$_GET['List'];
+	$query = "UPDATE hackdukedatabase.class SET class.StudentIds='{$std_list}' WHERE ClassId = '{$class_id}'";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		$rows = array();
+		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+			 array_push($rows, $row[0]);
+		}
+		$str = implode (",", $rows);
+		echo $str;
+		http_status_code(202);
+		$result->free();
+	 	// CLOSE CONNECTION
+	 	$mysqli->close();
+		exit(1);
+		return;
+	}
+	   
+	$result->free();
+	// CLOSE CONNECTION
+	$mysqli->close();
+	http_status_code(406);
+	exit(1);
   }
 
-  // SetStudents: takes in comma separated list of student ids and updates student list for given class id
-  if ($queryType == 'SetStudents') {
+  // SetClasses: takes in comma separated list of class ids and reconciles classes in class table with list
+  if ($queryType == 'SetClass') {
+	$class_id = @$_GET['ClassId'];
+	$teacher_name = @$_GET['TeacherName'];
+	$teacher_email = @$_GET['TeacherEmail'];
+	$teacher_password= @$_GET['TeacherPassword'];
+	$query = "UPDATE hackdukedatabase.class SET TeacherName='{$teacher_name}', TeacherEmail='{$teacher_email}', TeacherPassword='{$teacher_password}' WHERE ClassId='{$class_id}'";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		echo 'True';
+		$result->free();
+	 	// CLOSE CONNECTION
+	 	$mysqli->close();
+		exit(1);
+		return;
+	}
+	   
+	$result->free();
+	// CLOSE CONNECTION
+	$mysqli->close();
+	http_status_code(406);
+	exit(1);
+
+  }
+  
+  // MakeClass creates a class
+  if ($queryType == 'MakeClass') {
+	$class_id = @$_GET['ClassId'];
+	$teacher_name = @$_GET['TeacherName'];
+	$teacher_email = @$_GET['TeacherEmail'];
+	$teacher_password= @$_GET['TeacherPassword'];
+	$query = "INSERT INTO hackdukedatabase.class TeacherName, TeacherEmail, TeacherPassword VALUES '{$teacher_name}', '{$teacher_email}', '{$teacher_password}'";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		echo 'True';
+		$result->free();
+	 	// CLOSE CONNECTION
+	 	$mysqli->close();
+		exit(1);
+		return;
+	}
+	   
+	$result->free();
+	// CLOSE CONNECTION
+	$mysqli->close();
+	http_status_code(406);
+	exit(1);
 
   }
   

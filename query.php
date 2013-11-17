@@ -1,11 +1,10 @@
 <?php  
-
+echo 'foo';
 require_once ('db.php');
-
+echo'bar';
   // vars
 $queryType = @$_POST['Query'];
-var_dump($queryType);
-
+echo 'baz';
   // TestConnection: used by ppt plugin to see if can connect
 if ($queryType == 'TestConnection') {
 	echo TRUE;

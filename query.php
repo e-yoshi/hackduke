@@ -91,7 +91,26 @@
 
   // GetStudents: returns comma separated student ids given a class id
   if ($queryType == 'GetStudents') {
-	  
+	  $class_id = @$_GET['ClassId'];
+	$query = "SELECT class.StudentId FROM hackdukedatabase.class WHERE TeacherName='{$class_id}'";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		$row = mysqli_fetch_array($result, MYSQLI_NUM);
+		$str = implode (",", $row[]);
+		echo $str;
+		http_status_code(202);
+		$result->free();
+	 	// CLOSE CONNECTION
+	 	$mysqli->close();
+		exit(1);
+		return;
+	}
+	   
+	$result->free();
+	// CLOSE CONNECTION
+	$mysqli->close();
+	http_status_code(406);
+	exit(1);
   }
 
   // SetClasses: takes in comma separated list of class ids and reconciles classes in class table with list

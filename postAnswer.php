@@ -2,7 +2,6 @@
 	require_once ('db.php');
 	
 	if(isset($_GET['Response'])){
-		$class_id = filter_var(@$_GET['ClassId'], FILTER_SANITIZE_NUMBER_INT);
 		$std_resp = filter_var($_GET['Response'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 	} else {
 		//Bad Request
@@ -25,9 +24,10 @@
 		exit(406);
 	}	
 	$query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' WHERE classlog.StudentId = '{$std_id}' FROM hackdukedatabase.classlog ORDER BY TimeStarted DESC LIMIT 1";
-		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	
 	if($result==TRUE){
+		echo true;
 		exit(202);
 	}
 	

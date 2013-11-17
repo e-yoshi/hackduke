@@ -12,18 +12,18 @@
 	
 	if(isset($_GET['Phone'])){
 		//Comes from twillio
-		$std_phone = filter_var($_GET['Phone'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber = '9195368440'";
-		$std_id = $mysqli->query($query) or die($mysqli->error.__LINE__);		
-		var_dump($std_id);
-		$std_id->free();
+		$std_phone = filter_var(@$_GET['Phone'], FILTER_SANITIZE_NUMBER_INT);
+		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber = '{$std_phone}'";
+		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
+		$std_id = $result['student.StudentId'];
+		$result->free();
 	} elseif (isset($_GET['Email'])){
 		//SendGrid
-		$std_email = filter_var($_GET['Email'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$std_email = filter_var(@$_GET['Email'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.Email = '{$std_email}'";
-		$std_id = $mysqli->query($query) or die($mysqli->error.__LINE__);
-			var_dump($std_id);
-		$std_id->free();
+		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
+		$std_id = $result['student.StudentId'];
+		$result->free();
 	} else{
 		//Bad request
 		http_status_code(406);

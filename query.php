@@ -141,11 +141,6 @@
 		$str = implode (",", $rows);
 		echo $str;
 		http_status_code(202);
-		$result->free();
-	 	// CLOSE CONNECTION
-	 	$mysqli->close();
-		exit(1);
-		return;
 	}
 	   
 	$result->free();
@@ -185,18 +180,8 @@
 	$query = "UPDATE hackdukedatabase.class SET class.StudentIds='{$std_list}' WHERE ClassId = '{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
-		$rows = array();
-		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-			 array_push($rows, $row[0]);
-		}
-		$str = implode (",", $rows);
-		echo $str;
+		echo 'True';
 		http_status_code(202);
-		$result->free();
-	 	// CLOSE CONNECTION
-	 	$mysqli->close();
-		exit(1);
-		return;
 	}
 	   
 	$result->free();

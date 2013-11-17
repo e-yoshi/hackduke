@@ -1,4 +1,8 @@
 <?php
+
+  // get GET params
+  $classId = $_GET['ClassId'];
+  echo "Class id is $classId\n";
  
   // require the twilio php library 
   require "twilio-php-master/Services/Twilio.php";
@@ -21,7 +25,6 @@
   }
 
   // make query
-  $classId = $_GET['ClassId'];
   $studentIds = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT StudentId FROM class WHERE ClassId=$classId"));
   if ($studentIds == NULL) {
     exit("Class not found");

@@ -37,10 +37,11 @@ $classId = $_GET['ClassId'];
   $fromEmail = "inquizio@inquizio.bymail.in";
   foreach ($studentIdArray as $id) {
     echo "Getting email for student $id<br>";
-    $email = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT Email FROM student WHERE StudentId=$id"))['Email'];
+    $result = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT Email FROM student WHERE StudentId=$id"));
+    $email = $result['Email'];
     $mailObj = new SendGrid\Mail();
     $mailObj->addTo($email)->setFrom($fromEmail)->setSubject("INQUIZIO: Response requested")->setText("Hello from Inquizio! Your instructor has requested a response from you; please reply to this email with the letter corresponding to your answer!");
-    $mailObj->$smtp->send($mailObj);
+    $sendGrid->$smtp->send($mailObj);
     echo "Sent message to student $id at $email<br>";
   }
 

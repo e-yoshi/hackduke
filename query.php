@@ -42,7 +42,8 @@
 	if($result==TRUE){
 		$rows = array();
 		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-			 array_push($rows, $row);
+			 array_push($rows, $row[0]);
+			 array_push($rows, $row[1]);
 		}
 		$str = implode (",", $rows);
 		echo $str;

@@ -12,8 +12,6 @@
 		printf("Connect failed: %s\n", mysqli_connect_error());
 		exit();
 	}
-	$mysqli->autocommit($link, FALSE);
-
 	
 	if(isset($_GET['ClassId'])&&isset($_GET['Response'])){
 		$class_id = filter_var(@$_GET['ClassId'], FILTER_SANITIZE_NUMBER_INT);

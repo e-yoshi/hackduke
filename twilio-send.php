@@ -36,9 +36,9 @@ error_reporting(E_ALL);
 
   $question = $_POST['Question'];
   $success = TRUE;	
-  $query = "INSERT INTO quiz (Title, Question, ClassId) VALUES ('{$quiz_title}', '{$question}', '{$class_id}')";
+  $query = "INSERT INTO quiz (Question, ClassId) VALUES ('{$question}', '{$classId}')";
   $result = mysqli_query($mysqlCon, $query);
-  $query = "DELETE FROM response WHERE ClassId=$class_id";
+  $query = "DELETE FROM response WHERE ClassId=$classId";
   $result = mysqli_query($mysqlCon, $query);
   echo $success;
   

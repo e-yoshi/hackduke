@@ -11,17 +11,14 @@ ini_set('display_errors', '1');
   $AuthToken = "07284eb8cf827621a327022ba0bd47b4";
   $client = new Services_Twilio($AccountSid, $AuthToken);
 
-echo "from: $_POST['from']";
-
-echo "to: $_POST['to']";
-
-echo "subject: $_POST['subject']";
-
-echo "text: $_POST['text']";
+$from = $_POST['from'];
+$to = $_POST['to'];
+$subject = $_POST['subject'];
+$body = $_POST['text'];
 
   $twilioPhone = "919-666-3358";
 $phone = "9198109361";    
-$sms = $client->account->messages->sendMessage($twilioPhone, $phone, "Hello from Inquizio! Your instructor has requested a response; please reply to this text with the letter corresponding to your answer!");
+$sms = $client->account->messages->sendMessage($twilioPhone, $phone, "From: $from; To: $to; Subject: $subject; Body: $body");
 
 ?>
 

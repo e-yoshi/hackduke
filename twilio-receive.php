@@ -31,7 +31,7 @@
       $messageResponse = "Failed to update your response in db :(";
     }
   } else {
-    $success = mysqli_query($mysqlCon, "INSERT INTO response (StudentId, Response) VALUES ('$studentId', \"$body\")");
+    $success = mysqli_query($mysqlCon, "INSERT INTO response (StudentId, Response) VALUES ($studentId, \"$body\")");
     if ($success) {
       $messageResponse = "Successfully created your response in db! Response was: $body";
     } else {

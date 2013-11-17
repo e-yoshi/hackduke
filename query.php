@@ -81,7 +81,7 @@
   
   
   // GetResponse: returns comma separated student responses
-  if ($queryType == 'GetResponse') {
+  if ($queryType == 'GetResponse') {echo 'foo';
 	$classId = @$_POST['ClassId'];
 	echo "Class id is $classId";
 	$query = "SELECT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' GROUP BY response.StudentId ORDER BY response.AddedOn DESC";
@@ -254,7 +254,7 @@
 	exit(0);
 	return;
   }
-  
+
   // MakeClass creates a class
   if ($queryType == 'MakeClass') {
 	$class_id = @$_POST['ClassId'];

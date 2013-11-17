@@ -1,8 +1,4 @@
 <?php
-error_reporting(E_ALL);  
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 'on');
-  
   // db vars
   $dbHost = "us-cdbr-azure-west-b.cleardb.com";
   $dbUser = "bcd4a2c313611e";
@@ -12,7 +8,6 @@ ini_set('display_errors', 'on');
   // msg vars
   $from = $_REQUEST['From'];
   $body = $_REQUEST['Body'];
-  echo 'test';
   // get student from db
   $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
   if (mysqli_connect_errno($mysqlCon)) {

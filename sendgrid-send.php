@@ -30,7 +30,7 @@ $classId = $_GET['ClassId'];
   if ($studentIds == NULL) {
     exit("Class not found");
   }
-  $studentIdArray = explode(",", $studentIds['StudentId']);
+  $studentIdArray = explode(",", $studentIds['StudentIds']);
 
   // send text messages
   $sendGrid = new SendGrid($user, $pass);

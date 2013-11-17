@@ -11,44 +11,37 @@ ini_set('display_errors', '1');
  $user = 'azure_0c3c5610525389e9875c7eda6e42678a@azure.com';
  $pass = '7rjwkvyt';
 
+$classId = $_GET['ClassId'];
 
-$to = array(
-      'xurui203@gmail.com',
-      'jcw46@duke.edu',
-	  'elder.yoshida@gmail.com'
- );
- 
- foreach ($to as $address){
-	  
- $params = array(
-      'api_user' => $user,
-      'api_key' => $pass,
-      'to' => $address,
-	  'subject' => 'First round test',
-      'html' => 'hihihi',
-      'text' => 'hihihi',
-      'from' => 'anything@xurui203.bymail.in',
-   );
+  // connect to mysql db
+  $dbHost = "us-cdbr-azure-west-b.cleardb.com";
+  $dbUser = "bcd4a2c313611e";
+  $dbPass = "886d7131";
+  $dbName = "hackdukedatabase";
+  $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 
- $request = $url.'api/mail.send.json';
+  // check connection
+  if (mysqli_connect_errno($mysqlCon)) {
+    exit("Failed to connect to db\n");
+  }
 
- // Generate curl request
- $session = curl_init($request);
+  // make query
+  $studentIds = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT StudentId FROM class WHERE ClassId=$classId"));
+  if ($studentIds == NULL) {
+    exit("Class not found");
+  }
+  $studentIdArray = explode(",", $studentIds['StudentId']);
 
- // Tell curl to use HTTP POST
- curl_setopt ($session, CURLOPT_POST, true);
+  // send text messages
+  $sendGrid = new SendGrid($user, $pass);
+  $fromEmail = "inquizio@inquizio.bymail.in";
+  foreach ($studentIdArray as $id) {
+    echo "Getting email for student $id<br>";
+    $email = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT Email FROM student WHERE StudentId=$id"));
+    $mailObj = new SendGrid\Mail();
+    $mailObj->addTo($email)->setFrom($fromEmail)->setSubject("INQUIZIO: Response requested")->setText("Hello from Inquizio! Your instructor has requested a response from you; please reply to this email with the letter corresponding to your answer!");
+    $mailObj->$smtp->send($mailObj);
+    echo "Sent message to student $id at $email['Email']<br>";
+  }
 
- // Tell curl that this is the body of the POST
- curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
-
- // Tell curl not to return headers, but do return the response
- curl_setopt($session, CURLOPT_HEADER, false);
- curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-
- // obtain response
- $response = curl_exec($session);
- curl_close($session);
-
- // print everything out
- print_r($response);
  }

@@ -38,6 +38,6 @@
     echo "Getting phone for student $id<br>";
     $phone = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT PhoneNumber FROM student WHERE StudentId=$id"));
     $sms = $client->account->messages->sendMessage($twilioPhone, $phone, "Hello from Inquizio! Your instructor has requested a response; please reply to this text with the letter corresponding to your answer!");
-    echo "Sent message to student $id at $phone<br>";
+    echo "Sent message to student $id at $phone['PhoneNumber']<br>";
   }
 

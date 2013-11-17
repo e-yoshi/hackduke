@@ -34,7 +34,15 @@ error_reporting(E_ALL);
   }
   $studentIdArray = explode(",", $studentIds['StudentIds']);
 
-  // send text messages
+  $question = $_POST['Question'];
+  $success = TRUE;	
+  $query = "INSERT INTO quiz (Title, Question, ClassId) VALUES ('{$quiz_title}', '{$question}', '{$class_id}')";
+  $result = mysqli_query($mysqlCon, $query);
+  $query = "DELETE FROM response WHERE ClassId=$class_id";
+  $result = mysqli_query($mysqlCon, $query);
+  echo $success;
+  
+// send text messages
   $twilioPhone = "919-666-3358";
   foreach ($studentIdArray as $id) {
     echo "Getting phone for student $id<br>";

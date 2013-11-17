@@ -14,7 +14,7 @@ $mail->
   setSubject('Payment')->
   setText('Here is your $20!')->
   setHtml('<strong>Here is your $20!</strong>');
-$work = $sendgrid->web->send($mail);
+$work = $sendgrid->smtp->send($mail);
 
 
 echo $work ? "YAY!" : "nay.";

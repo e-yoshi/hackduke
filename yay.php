@@ -1,29 +1,37 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+ $url = 'http://sendgrid.com/';
+ $user = 'myusername';
+ $pass = 'mypassword'; 
 
-$ch = curl_init();
+ $params = array(
+      'api_user' => $user,
+      'api_key' => $pass,
+      'to' => 'nick@sendgrid.com',
+      'subject' => 'testing from curl',
+      'html' => 'testing body',
+      'text' => 'testing body',
+      'from' => 'nick@sendgrid.com',
+   );
 
-curl_setopt($ch, CURLOPT_URL,"https://api.sendgrid.com/api/mail.send.json");
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS,
-            "postvar1=value1&postvar2=value2&postvar3=value3");
+ $request = $url.'api/mail.send.json';
 
-// in real life you should use something like:
-// curl_setopt($ch, CURLOPT_POSTFIELDS, 
-//          http_build_query(array('postvar1' => 'value1')));
+ // Generate curl request
+ $session = curl_init($request);
 
-// receive server response ...
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+ // Tell curl to use HTTP POST
+ curl_setopt ($session, CURLOPT_POST, true);
 
-$server_output = curl_exec ($ch);
+ // Tell curl that this is the body of the POST
+ curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
 
-echo $server_output;
+ // Tell curl not to return headers, but do return the response
+ curl_setopt($session, CURLOPT_HEADER, false);
+ curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 
-curl_close ($ch);
+ // obtain response
+ $response = curl_exec($session);
+ curl_close($session);
 
-// further processing ....
-if ($server_output == "OK") { ... } else { ... }
-
-?>
+ // print everything out
+ print_r($response);

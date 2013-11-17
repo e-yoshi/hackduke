@@ -16,7 +16,8 @@ $mail->
   setHtml('<strong>Here is your $20!</strong>');
 $work = $sendgrid->web->send($mail);
 
-print_r($work);
+
+echo $work ? "YAY!" : "nay.";
 
 echo "new sendgrid mail created";
 

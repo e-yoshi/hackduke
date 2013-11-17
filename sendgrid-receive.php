@@ -1,4 +1,5 @@
 <?php
+
 require "sendgrid-php/SendGrid_loader.php";
 require "unirest-php-master/lib/Unirest.php";
 
@@ -52,7 +53,7 @@ ini_set('display_errors', '1');
       'api_user' => $user,
       'api_key' => $pass,
       'to' => $from,
-      'subject' => 'Notification',
+      'subject' => 'Response notification',
       'html' => $messageResponse,
       'text' => $messageResponse,
       'from' => 'xurui203@gmail.com',

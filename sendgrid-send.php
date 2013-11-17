@@ -15,9 +15,12 @@ ini_set('display_errors', '1');
       'api_user' => $user,
       'api_key' => $pass,
       'to' => 'xurui203@gmail.com',
-      'subject' => 'Your payment request has been rejected.',
-      'html' => 'yolo',
-      'text' => 'yolo',
+	  'to' => 'jcw46@duke.edu',
+	  'to' => 'elder.yoshida@gmail.com',
+
+	  'subject' => 'First round test',
+      'html' => 'hihihi',
+      'text' => 'hihihi',
       'from' => 'xurui203@gmail.com',
    );
 

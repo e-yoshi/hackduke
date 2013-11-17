@@ -17,7 +17,7 @@
 	$teacher_name = @$_GET['TeacherName'];
 	$teacher_email = @$_GET['TeacherEmail'];
 	$teacher_password= @$_GET['TeacherPassword'];
-	
+	//Authenticate....
    	$quiz_title = @$_GET['Title'];
     $question = @$_GET['Question'];
 	
@@ -34,6 +34,7 @@
 	$mysqli->close();
 	return;
   }
+  
   //OpenQuiz
   if($queryType == 'OpenQuiz') {
 	$class_id = @$_GET['ClassId'];
@@ -83,7 +84,7 @@
   // GetResponse: returns comma separated student responses
   if ($queryType == 'GetResponse') {
 	  $classId = @$_GET['ClassId'];
-	$query = "SELECT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}'";
+	$query = "SELECT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' ORDER BY AddedOn DESC LIMIT 1";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		$rows = array();

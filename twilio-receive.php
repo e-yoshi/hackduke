@@ -41,7 +41,9 @@ error_reporting(E_ALL);
   } else {
     $messageResponse = "Could not find student id for phone number";
   }	
-
+	$result->free();
+	$mysqlCon->close();
+	exit(0);
 ?>
 
 <Response>

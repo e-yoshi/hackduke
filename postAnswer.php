@@ -36,7 +36,7 @@
 		exit(1);
 	}	
 	if(is_null($std_id)){
-	$query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' WHERE classlog.StudentId = '{$std_id}' FROM hackdukedatabase.classlog ORDER BY TimeStarted DESC LIMIT 1";
+	$query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' FROM hackdukedatabase.classlog WHERE classlog.StudentId='{$std_id}' ORDER BY TimeStarted DESC LIMIT 1";
 	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	var_dump($result);
 	}

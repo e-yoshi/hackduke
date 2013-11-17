@@ -16,7 +16,7 @@
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber='{$std_phone}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
 		$row = $result->fetch_row();
-		$std_id = $row[1];
+		$std_id = $row[0];
 		var_dump($result);
 		var_dump($std_id);
 
@@ -27,7 +27,7 @@
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.Email = '{$std_email}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
 		$row = $result->fetch_row();
-		$std_id = $row[1];
+		$std_id = $row[0];
 		var_dump($std_id);
 		$result->free();
 	} else{

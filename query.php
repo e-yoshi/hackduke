@@ -88,7 +88,7 @@
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result != NULL){
 		$rows = array();
-		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+		while (($row = mysqli_fetch_array($result, MYSQLI_NUM)) != NULL) {
 			 array_push($rows, $row[1]);
 			 array_push($rows, $row[0]);
 		}

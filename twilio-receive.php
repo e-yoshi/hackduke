@@ -25,15 +25,15 @@
 
   echo "Creating request<br>";
 
-  $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body");
   try {
+    $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body");
     echo "Sending request<br>";
     $response = $request->send();
     echo "Request sent to $request->getUrl()<br>";
     $responseCode = $response->getResponseCode();
     echo "Got HTTP response: $responseCode<br>";
     $messageResponse = "Got response code: $responseCode.";
-  } catch (HttpException $e) {
+  } catch (Exception $e) {
     echo $e;
     $messageResponse = $e;
   }

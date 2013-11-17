@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-$fh = fopen('/tmp/parse.log', 'a+');
+$fh = fopen('~/parse.log', 'a+');
 if ( $fh )
 {
 	fwrite($fh, print_r($_POST, true) . print_r($_FILES, true));

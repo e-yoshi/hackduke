@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-include 'sendgrid-php/lib/SendGrid_loader.php';
+include 'sendgrid-php/SendGrid_loader.php';
 
 $sendgrid = new SendGrid('azure_0c3c5610525389e9875c7eda6e42678a@azure.com', '7rjwkvyt');
 $mail = new SendGrid\Mail();

@@ -32,6 +32,41 @@
 	
 	$result->free();	
 	
+	$query = "SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		$row = mysqli_fetch_array($result, MYSQLI_NUM);
+	} else {
+		$result->free();
+		// CLOSE CONNECTION
+		$mysqli->close();
+		exit(0);
+		return;
+	}
+	
+	$result->free();
+	$subquery = "";
+	
+	$students = explode(',',$row[0]);
+	foreach ($students as &$std) {
+   		$subquery = $subquery."({$class_id}, {$std}),";
+	}
+	substr_replace($subquery ,"",-1); //remove extra comma
+
+	$query = "INSERT INTO classlog (ClassId, StudentId) VALUES {$subquery}";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		$row = mysqli_fetch_array($result, MYSQLI_NUM);
+	} else {
+		$result->free();
+		// CLOSE CONNECTION
+		$mysqli->close();
+		exit(0);
+		return;
+	}
+	
+	$result->free();
+	
 	// CLOSE CONNECTION
 	$mysqli->close();
 	return;

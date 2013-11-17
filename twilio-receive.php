@@ -7,8 +7,8 @@
   $dbName = "hackdukedatabase";
 
   // msg vars
-  $from = $_REQUEST['From'];
-  $body = $_REQUEST['Body'];
+  $from = $_GET['From'];
+  $body = $_GET['Body'];
   
   // get student from db
   $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
@@ -23,11 +23,14 @@
   }
   $studentId = mysqli_fetch_array($result)['StudentId'];
 
+  echo "Creating request<br>";
+
   $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body", HttpRequest::METH_GET);
   try {
     $response = $request->send();
     $responseCode = $response->getResponseCode();
-    $messageResponse = "Got responsen code $responseCode.";
+    echo "Got HTTP response: $responseCode<br>";
+    $messageResponse = "Got response code: $responseCode.";
   } catch (HttpException $e) {
     echo $e;
     $messageResponse = $e;

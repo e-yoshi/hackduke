@@ -25,7 +25,7 @@ error_reporting(E_ALL);
   }
   
   $std_resp = filter_var($body, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-  $std_phone = filter_var($from, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+  $std_phone = filter_var($fromNormalized, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
   $query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber='{$std_phone}'";
   $result = mysqli_query($mysqlCon, $query);
   $rows = mysqli_fetch_array($result);

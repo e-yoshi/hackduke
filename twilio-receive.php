@@ -24,7 +24,7 @@
   $studentId = mysqli_fetch_array($result)['StudentId'];
   $responseExists = mysqli_query($mysqlCon, "SELECT Response FROM response WHERE StudentId=$studentId") != NULL;
   if ($responseExists) {
-    $success = mysqli_query($mysqlCon, "UPDATE response SET Response=$body WHERE StudentId=$studentId");
+    $success = mysqli_query($mysqlCon, "UPDATE response SET Response=\"$body\" WHERE StudentId=$studentId");
     if ($success) {
       $messageResponse = "Successfully updated your response in db! Response was: $body";
     } else {

@@ -15,7 +15,8 @@
 		$std_phone = filter_var(@$_GET['Phone'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber='{$std_phone}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
-		$std_id = $result['StudentId'];
+		$row = $result->fetch_row();
+		$std_id = $row[1];
 		var_dump($result);
 		var_dump($std_id);
 
@@ -25,7 +26,8 @@
 		$std_email = filter_var(@$_GET['Email'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.Email = '{$std_email}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
-		$std_id = $result['StudentId'];
+		$row = $result->fetch_row();
+		$std_id = $row[1];
 		var_dump($std_id);
 		$result->free();
 	} else{

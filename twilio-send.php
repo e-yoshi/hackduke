@@ -38,8 +38,9 @@ error_reporting(E_ALL);
   $twilioPhone = "919-666-3358";
   foreach ($studentIdArray as $id) {
     echo "Getting phone for student $id<br>";
-    $phone = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT PhoneNumber FROM student WHERE StudentIds=$id"))['PhoneNumber'];
-    $sms = $client->account->messages->sendMessage($twilioPhone, $phone, "Hello from Inquizio! Your instructor has requested a response; please reply to this text with the letter corresponding to your answer!");
+    $phone = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT PhoneNumber FROM student WHERE StudentId=$id"));
+    $phoneNumber = $phone['PhoneNumber'];
+    $sms = $client->account->messages->sendMessage($twilioPhone, $phoneNumber, "Hello from Inquizio! Your instructor has requested a response; please reply to this text with the letter corresponding to your answer!");
     echo "Sent message to student $id at $phone<br>";
   }
 ?>

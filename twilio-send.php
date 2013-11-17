@@ -40,7 +40,7 @@ error_reporting(E_ALL);
   //$result->free();
   $query = "DELETE FROM hackdukedatabase.response";
   $result = mysqli_query($mysqlCon, $query);
-  $result->free();
+  @$result->free();
   echo "True";
   $mysqlCon->close();
 

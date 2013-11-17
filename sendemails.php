@@ -13,8 +13,9 @@ $mail->
   setSubject('Payment')->
   setText('Here is your $20!')->
   setHtml('<strong>Here is your $20!</strong>');
-$sendgrid->web->
-  send($mail);
+$work = $sendgrid->web->send($mail);
+
+print_r($work);
 
 echo "new sendgrid mail created";
 

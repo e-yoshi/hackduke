@@ -5,6 +5,6 @@
 <title>Untitled Document</title>
 </head>
 <body>
- <?php echo '<p>Hello World</p>'; ?> 
+<?php echo @$_GET['taco'] ?>
 </body>
 </html>

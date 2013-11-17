@@ -11,12 +11,15 @@ ini_set('display_errors', '1');
  $user = 'azure_0c3c5610525389e9875c7eda6e42678a@azure.com';
  $pass = '7rjwkvyt';
 
+$to = array(
+      'xurui203@gmail.com',
+      'jcw46@duke.edu',
+	  'elder.yoshida@gmail.com'
+ );
  $params = array(
       'api_user' => $user,
       'api_key' => $pass,
-      'to' => 'xurui203@gmail.com',
-	  'to' => 'jcw46@duke.edu',
-	  'to' => 'elder.yoshida@gmail.com',
+      'to' => $to,
 	  'subject' => 'First round test',
       'html' => 'hihihi',
       'text' => 'hihihi',

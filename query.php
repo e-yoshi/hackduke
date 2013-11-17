@@ -84,7 +84,7 @@
   // GetResponse: returns comma separated student responses
   if ($queryType == 'GetResponse') {
 	$classId = @$_GET['ClassId'];
-	$query = "SELECT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' ORDER BY AddedOn DESC LIMIT 1";
+	$query = "SELECT DISTINCT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' ORDER BY AddedOn DESC";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	var_dump($result);
 	if($result==TRUE){

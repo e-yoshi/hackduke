@@ -46,6 +46,7 @@
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		$rows = $result->fetch_row();
+		var_dump($rows);
 		$str = implode (", ", $rows);
 		echo $str;
 		http_status_code(202);

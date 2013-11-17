@@ -1,6 +1,10 @@
 <?php
 ini_set('display_errors', E_ALL);
 error_reporting(E_ALL);  
+
+  // require httprequest library
+  require("http-request-1.4.4/Request.php");
+
   // db vars
   $dbHost = "us-cdbr-azure-west-b.cleardb.com";
   $dbUser = "bcd4a2c313611e";

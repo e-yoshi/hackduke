@@ -1,47 +1,37 @@
 <?php  
   
+  	require_once ('db.php');
+
   // vars
   $queryType = $_GET['Query'];
-  $dbHost = "us-cdbr-azure-west-b.cleardb.com";
-  $dbUser = "bcd4a2c313611e";
-  $dbPass = "886d7131";
-  $dbName = "hackdukedatabase";
 
   // TestConnection: used by ppt plugin to see if can connect
   if ($queryType == 'TestConnection') {
     echo TRUE;
-    exit();
-  }
-
-  // TestDatabase: see if we can connect to db
-  if ($queryType == 'TestDatabase') {
-    $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName); 
-    if (mysqli_connect_errno($mysqlCon)) {
-      echo FALSE;
-    } else {
-      echo TRUE;
-    }
-    exit();
+    exit(1);
   }
 
   // CreateQuestion: populates db with class info and sends texts/emails
   if($queryType == 'CreateQuestion') {
-    $classId = $_GET['ClassId']
-    $question = $_GET['Question']
-    $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
-    if (mysqli_connect_errno($mysqlCon) {
-      echo FALSE;
-      exit();
-    }
-    mysqli_query($mysqlCon, "UPDATE class SET Question='$question' WHERE classId=$classId");
-    echo mysqli_affected_rows($mysqlCon);
-    $request = new HttpRequest("http://hackduke.azurewebsites.net/twilio-send.php?ClassId=$classId", HttpRequest::METH_GET);
-    try {
-      $request->send();
-    } catch (HttpException $e) {
-      echo $e;
-      exit();
-    }
+    $classId = @$_GET['ClassId'];
+	$teacher_name = @$_GET['TeacherName'];
+	$teacher_email = @$_GET['TeacherEmail'];
+	$teacher_password= @$_GET['TeacherPassword'];
+	
+   	$quiz_title = @$_GET['Title'];
+    $question = @$_GET['Question'];
+	
+	$query = "INSERT INTO quiz Title, Question, ClassId VALUES '{$quiz_title}', '{$question}', '{$classId}'";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		echo TRUE;
+		http_status_code(202);
+		exit(1);
+	}
+	
+	$result->free();
+	// CLOSE CONNECTION
+	$mysqli->close();
   }
 
   // GetResponse: returns comma separated student responses

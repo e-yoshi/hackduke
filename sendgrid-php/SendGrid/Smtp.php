@@ -2,13 +2,13 @@
 
 namespace SendGrid;
 
-class Smtp extends Api implements EmailInterface
+class Smtp extends Api implements MailInterface
 {
   //the available ports
-  const TLS             = 587;
+  const TLS = 587;
   const TLS_ALTERNATIVE = 25;
-  const SSL             = 465;
-  const HOSTNAME        = 'smtp.sendgrid.net';
+  const SSL = 465;
+  const HOSTNAME = 'smtp.sendgrid.net';
 
   //the list of port instances, to be recycled
   private $swift_instances = array();
@@ -72,12 +72,12 @@ class Smtp extends Api implements EmailInterface
 
   /* _mapToSwift
    * Maps the SendGridMail Object to the SwiftMessage object
-   * @param Email $email - the SendGridMail object
+   * @param Mail $mail - the SendGridMail object
    * @return the SwiftMessage object
    */
-  protected function _mapToSwift(Email $email)
+  protected function _mapToSwift(Mail $mail)
   {
-    $message = new \Swift_Message($email->getSubject());
+    $message = new \Swift_Message($mail->getSubject());
 
     /*
      * Since we're sending transactional email, we want the message to go to one person at a time, rather
@@ -85,40 +85,40 @@ class Smtp extends Api implements EmailInterface
      * but Swift still requires a 'to' address. So we'll falsify it with the from address, as it will be 
      * ignored anyway.
      */
-    $message->setTo($email->getFrom());
-    $message->setFrom($email->getFrom(true));
-    $message->setCc($email->getCcs());
-    $message->setBcc($email->getBccs());
+    $message->setTo($mail->getFrom());
+    $message->setFrom($mail->getFrom(true));
+    $message->setCc($mail->getCcs());
+    $message->setBcc($mail->getBccs());
 
-    if ($email->getHtml())
+    if ($mail->getHtml())
     {
-      $message->setBody($email->getHtml(), 'text/html');
-      if ($email->getText()) $message->addPart($email->getText(), 'text/plain');
+      $message->setBody($mail->getHtml(), 'text/html');
+      if ($mail->getText()) $message->addPart($mail->getText(), 'text/plain');
     }
     else
     {
-      $message->setBody($email->getText(), 'text/plain');
+      $message->setBody($mail->getText(), 'text/plain');
     }
 
-    if(($replyto = $email->getReplyTo())) {
+    if(($replyto = $mail->getReplyTo())) {
       $message->setReplyTo($replyto);
     }
 
     // determine whether or not we can use SMTP recipients (non header based)
-    if($email->useHeaders())
+    if($mail->useHeaders())
     {
       //send header based email
-      $message->setTo($email->getFrom());
+      $message->setTo($mail->getFrom());
 
        //here we'll add the recipients list to the headers
-      $headers = $email->getSmtpapiHeaders();
-      $headers['to'] = $email->getTos();
-      $email->setSmtpapiHeaders($headers);
+      $headers = $mail->getHeaders();
+      $headers['to'] = $mail->getTos();
+      $mail->setHeaders($headers);
     }
     else
     {
       $recipients = array();
-      foreach ($email->getTos() as $recipient)
+      foreach ($mail->getTos() as $recipient)
       {
         if(preg_match("/(.*)<(.*)>/", $recipient, $results))
         {
@@ -133,44 +133,33 @@ class Smtp extends Api implements EmailInterface
       $message->setTo($recipients);
     }
 
-    $attachments = $email->getAttachments();
+    $attachments = $mail->getAttachments();
 
     //add any attachments that were added
     if ($attachments)
     {
       foreach ($attachments as $attachment)
       {
-        if (array_key_exists('custom_filename', $attachment)) {
-          $message->attach(\Swift_Attachment::fromPath($attachment['file'])->setFileName($attachment['custom_filename']));
-        } else {
-          $message->attach(\Swift_Attachment::fromPath($attachment['file']));
-        }
+        $message->attach(\Swift_Attachment::fromPath($attachment['file']));
       }
     }
 
     //add all the headers
     $headers = $message->getHeaders();
-    $headers->addTextHeader('X-SMTPAPI', $email->getSmtpapiHeadersJson());
-
-    // Add the extra message headers (RFC 822)
-    if (count($email->getMessageHeaders())) {
-      foreach ($email->getMessageHeaders() as $name => $value) {
-        $headers->addTextHeader($name, $value);
-      }
-    }
+    $headers->addTextHeader('X-SMTPAPI', $mail->getHeadersJson());
 
     return $message;
   }
 
   /* send
-   * Send the Email Message
-   * @param Mail $email - the SendGridMailMessage to be sent
+   * Send the Mail Message
+   * @param Mail $mail - the SendGridMailMessage to be sent
    * @return true if mail was sendable (not necessarily sent)
    */
-  public function send(Email $email)
+  public function send(Mail $mail)
   {
     $swift = $this->_getSwiftInstance($this->port);
-    $message = $this->_mapToSwift($email);
+    $message = $this->_mapToSwift($mail);
 
     try 
     {

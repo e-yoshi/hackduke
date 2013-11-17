@@ -1,6 +1,6 @@
 <?php
 
-class SendGridTest_Smtp extends PHPUnit_Framework_TestCase
+class SmtpTest extends PHPUnit_Framework_TestCase
 {
   public function testConstruction()
   {
@@ -10,7 +10,7 @@ class SendGridTest_Smtp extends PHPUnit_Framework_TestCase
 
     $this->assertEquals(new SendGrid\Smtp("foo", "bar"), $smtp);
 
-    $message = new SendGrid\Email();
+    $message = new SendGrid\Mail();
     $message->
       setFrom('bar@foo.com')->
       setFromName('John Doe')->

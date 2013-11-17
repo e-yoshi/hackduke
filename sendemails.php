@@ -2,12 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-include 'unirest-php-master/lib/Unirest.php';
-include 'sendgrid-php/lib/SendGrid.php';
-SendGrid::register_autoloader();
+include 'sendgrid-php/lib/SendGrid_loader.php';
 
 $sendgrid = new SendGrid('azure_0c3c5610525389e9875c7eda6e42678a@azure.com', '7rjwkvyt');
-$mail = new SendGrid\Email();
+$mail = new SendGrid\Mail();
 echo "new sendgrid mail created";
 $mail->
   addTo('xurui203@gmail.com')->

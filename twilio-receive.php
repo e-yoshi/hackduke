@@ -21,7 +21,7 @@
   if ($result == NULL) {
     exit("Received message from non-registered number");
   }
-  $studentId = mysqli_fetch_array($result);
+  $studentId = mysqli_fetch_array($result)['StudentId'];
   $responseExists = mysqli_query($mysqlCon, "SELECT Response FROM response WHERE StudentId=$studentId") != NULL;
   if ($responseExists) {
     $success = mysqli_query($mysqlCon, "UPDATE response SET Response=$body WHERE StudentId=$studentId");
@@ -31,7 +31,7 @@
       $messageResponse = "Failed to update your response in db :(";
     }
   } else {
-    $success = mysqli_query($mysqlCon, "INSERT INTO response (StudentId, Response) VALUES (\"$studentId['StudentId']\", \"$body\")");
+    $success = mysqli_query($mysqlCon, "INSERT INTO response (StudentId, Response) VALUES ('$studentId', \"$body\")");
     if ($success) {
       $messageResponse = "Successfully created your response in db! Response was: $body";
     } else {

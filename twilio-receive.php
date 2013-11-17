@@ -2,8 +2,6 @@
 ini_set('display_errors', E_ALL);
 error_reporting(E_ALL);  
   
-  require_once('db.php');
-
   // db vars
   $dbHost = "us-cdbr-azure-west-b.cleardb.com";
   $dbUser = "bcd4a2c313611e";
@@ -29,21 +27,19 @@ error_reporting(E_ALL);
   $std_resp = filter_var($body, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
   $std_phone = filter_var($from, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
   $query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber='{$std_phone}'";
-  $result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
+  $result = $mysqlCon->query($query) or die($mysqlCon->error.__LINE__);		
   $rows = $result->fetch_array(MYSQLI_NUM);
   $std_id = $rows[0];
   if (!is_null($std_id)) {
     $query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' FROM hackdukedatabase.classlog WHERE classlog.StudentId='{$std_id}' ORDER BY TimeStarted DESC LIMIT 1";
-    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+    $result = $mysqlCon->query($query) or die($mysqlCon->error.__LINE__);
     if ($result==TRUE) {
       $messageResponse = "Successfully saved your response to the db! Response was: $body";  
     }
   } 	
 
-  $result->free();
-
   // CLOSE CONNECTION
-  $mysqli->close();	
+  $mysqlCon->close();	
 ?>
 
 <Response>

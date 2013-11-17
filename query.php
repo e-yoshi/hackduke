@@ -47,11 +47,8 @@
 	if($result==TRUE){
 		$rows = array();
 		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-			var_dump($row);
 			 array_push($rows, $row[0]);
-
 		}
-		var_dump($rows);
 		$str = implode (",", $rows);
 		echo $str;
 		http_status_code(202);

@@ -15,8 +15,8 @@
 		$std_phone = filter_var(@$_GET['Phone'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber='{$std_phone}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
-		$row = $result->fetch_row();
-		$std_id = $row[0];
+		$rows = $result->fetch_array(MYSQLI_NUM);
+		$std_id = $rows[0];
 		var_dump($result);
 		var_dump($std_id);
 
@@ -26,8 +26,8 @@
 		$std_email = filter_var(@$_GET['Email'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.Email = '{$std_email}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
-		$row = $result->fetch_row();
-		$std_id = $row[0];
+		$rows = $result->fetch_array(MYSQLI_NUM);
+		$std_id = $rows[0];
 		var_dump($std_id);
 		$result->free();
 	} else{
@@ -35,9 +35,11 @@
 		http_status_code(406);
 		exit(1);
 	}	
+	if(is_null($std_id)){
 	$query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' WHERE classlog.StudentId = '{$std_id}' FROM hackdukedatabase.classlog ORDER BY TimeStarted DESC LIMIT 1";
 	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	var_dump($result);
+	}
 	if($result==TRUE){
 		http_status_code(202);
 		exit(1);

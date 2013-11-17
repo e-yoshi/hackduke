@@ -1,5 +1,5 @@
 <?php
-include 'path/to/sendgrid-php/SendGrid_loader.php';
+include 'sendgrid-php/lib/SendGrid.php';
 $sendgrid = new SendGrid('azure_0c3c5610525389e9875c7eda6e42678a@azure.com', '7rjwkvyt');
 $mail = new SendGrid\Mail();
 echo "new sendgrid mail created";

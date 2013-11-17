@@ -34,12 +34,13 @@ error_reporting(E_ALL);
     $query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' FROM hackdukedatabase.classlog WHERE classlog.StudentId='{$std_id}' ORDER BY TimeStarted DESC LIMIT 1";
     $result = $mysqlCon->query($query) or die($mysqlCon->error.__LINE__);
     if ($result==TRUE) {
-      $messageResponse = "Successfully saved your response to the db! Response was: $body";  
+      $messageResponse = "Successfully saved your response to the db! Response was: $body";
+      $mysqlCon->close(); 
+    } else {
+      $messageResponse = "Could not update the db :(";
     }
   } 	
 
-  // CLOSE CONNECTION
-  $mysqlCon->close();	
 ?>
 
 <Response>

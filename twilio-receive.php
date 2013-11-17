@@ -9,8 +9,8 @@ error_reporting(E_ALL);
   $dbName = "hackdukedatabase";
 
   // msg vars
-  $from = $_GET['From'];
-  $body = $_GET['Body'];
+  $from = $_REQUEST['From'];
+  $body = $_REQUEST['Body'];
   
   // get student from db
   $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);

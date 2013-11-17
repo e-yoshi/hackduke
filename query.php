@@ -3,12 +3,12 @@
   	require_once ('db.php');
 
   // vars
-  $queryType = @$_GET['Query'];
+  $queryType = @$_POST['Query'];
 
   // TestConnection: used by ppt plugin to see if can connect
   if ($queryType == 'TestConnection') {
     echo TRUE;
-    exit(1);
+    exit(0);
   }
 
   // CreateQuestion: populates db with class info and sends texts/emails
@@ -25,7 +25,7 @@
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		echo TRUE;
-		exit(1);
+		exit(0);
 	}
 	
 	$result->free();	
@@ -45,7 +45,7 @@
 		$result->free();
 		// CLOSE CONNECTION
 		$mysqli->close();
-		exit(1);
+		exit(0);
 		return;
 	}
 	
@@ -66,7 +66,7 @@
 		$result->free();
 		// CLOSE CONNECTION
 		$mysqli->close();
-		exit(1);
+		exit(0);
 		return;
 	}
 	
@@ -80,7 +80,7 @@
   
   // GetResponse: returns comma separated student responses
   if ($queryType == 'GetResponse') {
-	$classId = @$_GET['ClassId'];
+	$classId = @$_POST['ClassId'];
 	$query = "SELECT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' GROUP BY response.StudentId ORDER BY response.AddedOn DESC";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if(!is_null($result)){
@@ -118,14 +118,14 @@
 		$result->free();
 	 	// CLOSE CONNECTION
 	 	$mysqli->close();
-		exit(1);
+		exit(0);
 		return;
 	}
 	   
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	exit(1);
+	exit(0);
 	return;
   }
 
@@ -140,14 +140,14 @@
 		$result->free();
 	 	// CLOSE CONNECTION
 	 	$mysqli->close();
-		exit(1);
+		exit(0);
 		return;
 	}
 	   
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	exit(1);
+	exit(0);
 	return;
   }
   
@@ -163,7 +163,7 @@
 		$result->free();
 		// CLOSE CONNECTION
 		$mysqli->close();
-		exit(1);
+		exit(0);
 		return;
 	}
 	   
@@ -183,7 +183,7 @@
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	exit(1);
+	exit(0);
 	return;
   }
   
@@ -199,14 +199,14 @@
 		$result->free();
 	 	// CLOSE CONNECTION
 	 	$mysqli->close();
-		exit(1);
+		exit(0);
 		return;
 	}
 	   
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	exit(1);
+	exit(0);
 	return;
   }
   
@@ -223,7 +223,7 @@
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	exit(1);
+	exit(0);
 	return;
   }
 
@@ -240,14 +240,14 @@
 		$result->free();
 	 	// CLOSE CONNECTION
 	 	$mysqli->close();
-		exit(1);
+		exit(0);
 		return;
 	}
 	   
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	exit(1);
+	exit(0);
 	return;
   }
   
@@ -264,14 +264,14 @@
 		$result->free();
 	 	// CLOSE CONNECTION
 	 	$mysqli->close();
-		exit(1);
+		exit(0);
 		return;
 	}
 	   
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	exit(1);
+	exit(0);
 	return;
   }
   

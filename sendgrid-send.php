@@ -17,11 +17,10 @@ ini_set('display_errors', '1');
       'to' => 'xurui203@gmail.com',
 	  'to' => 'jcw46@duke.edu',
 	  'to' => 'elder.yoshida@gmail.com',
-
 	  'subject' => 'First round test',
       'html' => 'hihihi',
       'text' => 'hihihi',
-      'from' => 'xurui203@gmail.com',
+      'from' => 'anything@xurui203.bymail.in',
    );
 
  $request = $url.'api/mail.send.json';

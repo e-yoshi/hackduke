@@ -47,7 +47,9 @@
 	if($result==TRUE){
 		$rows = array();
 		while ($row = $mysqli->fetch_assoc($result)) {
-			$rows->push($row[1]);
+			$rows->push($row[0]);
+			var_dump($row);
+
 		}
 		var_dump($rows);
 		$str = implode (",", $rows);

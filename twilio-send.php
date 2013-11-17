@@ -1,25 +1,39 @@
 <?php
-  
-  echo "Twilio send php";
-
+ 
+  // require the twilio php library 
   require "twilio-php-master/Services/Twilio.php";
 
-  echo "required services twilio.php";
-
+  // create twilio client
   $AccountSid = "AC3d59d01368bbc628721a869c0404786b";
   $AuthToken = "07284eb8cf827621a327022ba0bd47b4";
-
-  echo "Creating client with account sid $AccountSid and authtoken $AuthToken";
-
   $client = new Services_Twilio($AccountSid, $AuthToken);
+  
+  // connect to mysql db
+  $dbHost = "us-cdbr-azure-west-b.cleardb.com";
+  $dbUser = "bcd4a2c313611e";
+  $dbPass = "886d7131";
+  $dbName = "hackdukedatabase";
+  $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 
-  echo "Creating people array";
+  // check connection
+  if (mysqli_connect_errno($mysqlCon)) {
+    exit("Failed to connect to db\n");
+  }
 
-  $people = array("+19198109361" => "Jimmy Wei", "+19195998902" => "Xu Rui");
+  // make query
+  $classId = $_GET['ClassId'];
+  $studentIds = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT StudentId FROM class WHERE ClassId=$classId"));
+  if ($studentIds == NULL) {
+    exit("Class not found");
+  }
+  $studentIdArray = explode(",", $studentIds['StudentId']);
 
-  foreach ($people as $number => $name) {
-    echo "Sending sms to $name at $number";
-    $sms = $client->account->messages->sendMessage("919-666-3358", $number, "Sup $name! You owe Jimmy Wei \$20! :)");
-    echo "Sent message to $name";
+  // send text messages
+  $twilioPhone = "919-666-3358";
+  foreach ($studentIdArray as $id) {
+    echo "Getting phone for student $id\n";
+    $phone = mysqli_query($mysqlCon, "SELECT PhoneNumber FROM student WHERE StudentId=$id");
+    $sms = $client->account->messages->sendMessage($twilioPhone, $phone, "Sup! You owe Jimmy Wei \$20! :)");
+    echo "Sent message to student $id at $phone\n";
   }
 

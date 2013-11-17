@@ -11,4 +11,3 @@
     echo "Sent message to $name";
   }
 
-?>

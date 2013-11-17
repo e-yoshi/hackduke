@@ -41,7 +41,7 @@ $classId = $_GET['ClassId'];
     $email = $result['Email'];
     $mailObj = new SendGrid\Mail();
     $mailObj->addTo($email)->setFrom($fromEmail)->setSubject("INQUIZIO: Response requested")->setText("Hello from Inquizio! Your instructor has requested a response from you; please reply to this email with the letter corresponding to your answer!");
-    $sendGrid->$smtp->send($mailObj);
+    $sendGrid->smtp->send($mailObj);
     echo "Sent message to student $id at $email<br>";
   }
 

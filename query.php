@@ -83,9 +83,10 @@
   
   // GetResponse: returns comma separated student responses
   if ($queryType == 'GetResponse') {
-	  $classId = @$_GET['ClassId'];
+	$classId = @$_GET['ClassId'];
 	$query = "SELECT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' ORDER BY AddedOn DESC LIMIT 1";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	var_dump($result);
 	if($result==TRUE){
 		$rows = array();
 		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {

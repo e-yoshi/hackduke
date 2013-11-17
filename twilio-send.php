@@ -1,5 +1,7 @@
 <?php
 
+ini_set('display_errors', E_ALL);
+error_reporting(E_ALL);  
   // get POST params
   $classId = $_GET['ClassId'];
   echo "Class id is $classId";

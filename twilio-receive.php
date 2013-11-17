@@ -24,15 +24,19 @@
   $studentId = mysqli_fetch_array($result);
   $responseExists = mysqli_query($mysqlCon, "SELECT Response FROM response WHERE StudentId=$studentId") != NULL;
   if ($responseExists) {
-    mysqli_query($mysqlCon, "UPDATE response SET Response=$body WHERE StudentId=$studentId");
+    $success = mysqli_query($mysqlCon, "UPDATE response SET Response=$body WHERE StudentId=$studentId");
   } else {
-    mysqli_query($mysqlCon, "INSERT INTO response (StudentId, Response) VALUES ($studentId, $body)");
+    $success = mysqli_query($mysqlCon, "INSERT INTO response (StudentId, Response) VALUES ($studentId, $body)");
   }
-  
+  if ($success) {
+    $messageResponse = "Thanks, we received your response of: $body";
+  } else {
+    $messageResponse = "Sorry, an error occurred in storing your response :(";
+  }
 ?>
 
 <Response>
   <Message>
-    Thanks, we received your response of: <?php echo $body ?>
+    <?php echo $messageResponse ?>
   </Message>
 </Response>

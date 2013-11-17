@@ -12,8 +12,8 @@
   }
 
   // CreateQuestion: populates db with class info and sends texts/emails
-  if($queryType == 'CreateQuestion') {
-    $classId = @$_GET['ClassId'];
+  if($queryType == 'CreateQuiz') {
+    $class_id = @$_GET['ClassId'];
 	$teacher_name = @$_GET['TeacherName'];
 	$teacher_email = @$_GET['TeacherEmail'];
 	$teacher_password= @$_GET['TeacherPassword'];
@@ -21,7 +21,7 @@
    	$quiz_title = @$_GET['Title'];
     $question = @$_GET['Question'];
 	
-	$query = "INSERT INTO quiz Title, Question, ClassId VALUES '{$quiz_title}', '{$question}', '{$classId}'";
+	$query = "INSERT INTO quiz Title, Question, ClassId VALUES '{$quiz_title}', '{$question}', '{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		echo TRUE;
@@ -29,11 +29,57 @@
 		exit(1);
 	}
 	
-	$result->free();
+	$result->free();	
 	// CLOSE CONNECTION
 	$mysqli->close();
+	return;
   }
+  //OpenQuiz
+  if($queryType == 'OpenQuiz') {
+	$class_id = @$_GET['ClassId'];
+	$query = "SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		$row = mysqli_fetch_array($result, MYSQLI_NUM);
+	} else {
+		$result->free();
+		// CLOSE CONNECTION
+		$mysqli->close();
+		http_status_code(406);
+		exit(1);
+		return;
+	}
+	
+	$result->free();
+	$subquery = "";
+	
+	$students = explode(',',$row[0]);
+	foreach ($students as &$std) {
+   		$subquery = $subquery."({$class_id}, {$std}),";
+	}
+	substr_replace($subquery ,"",-1); //remove extra comma
 
+	$query = "INSERT INTO classlog (ClassId, StudentId) VALUES {$subquery}";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		$row = mysqli_fetch_array($result, MYSQLI_NUM);
+	} else {
+		$result->free();
+		// CLOSE CONNECTION
+		$mysqli->close();
+		http_status_code(406);
+		exit(1);
+		return;
+	}
+	
+	$result->free();
+	
+	// CLOSE CONNECTION
+	$mysqli->close();
+	return;
+  }
+  
+  
   // GetResponse: returns comma separated student responses
   if ($queryType == 'GetResponse') {
 	  $classId = @$_GET['ClassId'];
@@ -60,6 +106,7 @@
 	$mysqli->close();
 	http_status_code(406);
 	exit(1);
+	return;
   }
 
   // GetClasses: returns comma separated class ids from teacher name
@@ -87,11 +134,12 @@
 	$mysqli->close();
 	http_status_code(406);
 	exit(1);
+	return;
   }
 
   // GetStudents: returns comma separated student ids given a class id
   if ($queryType == 'GetStudents') {
-	  $class_id = @$_GET['ClassId'];
+	$class_id = @$_GET['ClassId'];
 	$query = "SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
@@ -110,6 +158,7 @@
 	$mysqli->close();
 	http_status_code(406);
 	exit(1);
+	return;
   }
   
   
@@ -148,6 +197,7 @@
 	$mysqli->close();
 	http_status_code(406);
 	exit(1);
+	return;
   }
   
   if ($queryType == 'MakeStudent') {
@@ -171,6 +221,7 @@
 	$mysqli->close();
 	http_status_code(406);
 	exit(1);
+	return;
   }
   
    // SetStudents: takes in comma separated list of student ids and updates student list for given class id
@@ -189,6 +240,7 @@
 	$mysqli->close();
 	http_status_code(406);
 	exit(1);
+	return;
   }
 
   // SetClasses: takes in comma separated list of class ids and reconciles classes in class table with list
@@ -213,7 +265,7 @@
 	$mysqli->close();
 	http_status_code(406);
 	exit(1);
-
+	return;
   }
   
   // MakeClass creates a class
@@ -238,7 +290,7 @@
 	$mysqli->close();
 	http_status_code(406);
 	exit(1);
-
+	return;
   }
   
 ?>

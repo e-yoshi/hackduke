@@ -46,7 +46,7 @@
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		$rows = array();
-		while ($row = $mysqli->fetch_assoc($result)) {
+		while ($rows = mysqli_fetch_array($result, MYSQLI_NUM)) {
 			$rows->push($row[0]);
 			var_dump($row);
 			echo $row[0];

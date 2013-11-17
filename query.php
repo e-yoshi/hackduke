@@ -222,7 +222,7 @@
 	$teacher_name = @$_GET['TeacherName'];
 	$teacher_email = @$_GET['TeacherEmail'];
 	$teacher_password= @$_GET['TeacherPassword'];
-	$query = "INSERT INTO hackdukedatabase.class TeacherName, TeacherEmail, TeacherPassword VALUES '{$teacher_name}', '{$teacher_email}', '{$teacher_password}'";
+	$query = "INSERT INTO hackdukedatabase.class (TeacherName, TeacherEmail, TeacherPassword) VALUES ('{$teacher_name}', '{$teacher_email}', '{$teacher_password}')";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		echo 'True';

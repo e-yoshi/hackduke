@@ -1,5 +1,6 @@
 <?php
-  
+ini_set('display_errors', E_ALL);
+ErrorReporting(E_ALL);  
   // db vars
   $dbHost = "us-cdbr-azure-west-b.cleardb.com";
   $dbUser = "bcd4a2c313611e";

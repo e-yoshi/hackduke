@@ -35,13 +35,15 @@ error_reporting(E_ALL);
   $studentIdArray = explode(",", $studentIds['StudentIds']);
 
   $question = $_POST['Question'];
-  $success = TRUE;	
   $query = "INSERT INTO quiz (Question, ClassId) VALUES ('$question', '$classId')";
   $result = mysqli_query($mysqlCon, $query);
+  $result->free();
   $query = "DELETE FROM response WHERE ClassId=$classId";
   $result = mysqli_query($mysqlCon, $query);
-  echo $success;
-  
+  $result->free();
+  echo "True";
+  $mysqlCon->close();
+
   // send text messages
   $twilioPhone = "919-666-3358";
   foreach ($studentIdArray as $id) {

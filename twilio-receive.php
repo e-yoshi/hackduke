@@ -23,7 +23,7 @@
   }
   $studentId = mysqli_fetch_array($result)['StudentId'];
 
-  $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer/php?Phone=$from&Response=$body", HttpRequest::METH_GET);
+  $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$from&Response=$body", HttpRequest::METH_GET);
   try {
     $request->send();
   } catch (HttpException $e) {

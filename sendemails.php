@@ -1,4 +1,4 @@
-<?php
+?php
 
 require "sendgrid-php/SendGrid_loader.php";
 require "unirest-php-master/lib/Unirest.php";
@@ -14,7 +14,7 @@ ini_set('display_errors', '1');
  $params = array(
       'api_user' => $user,
       'api_key' => $pass,
-      'to' => 'jcw46@duke.edu',
+      'to' => 'xurui203@gmail.com',
       'subject' => 'Your payment request has been rejected.',
       'html' => 'yolo',
       'text' => 'yolo',

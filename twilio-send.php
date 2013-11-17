@@ -2,8 +2,9 @@
 
   // get GET params
   $classId = $_GET['ClassId'];
-  echo "Class id is $classId\n";
- 
+  echo "Class id is $classId";
+  echo "<br>";
+
   // require the twilio php library 
   require "twilio-php-master/Services/Twilio.php";
 
@@ -34,9 +35,9 @@
   // send text messages
   $twilioPhone = "919-666-3358";
   foreach ($studentIdArray as $id) {
-    echo "Getting phone for student $id\n";
-    $phone = mysqli_query($mysqlCon, "SELECT PhoneNumber FROM student WHERE StudentId=$id");
+    echo "Getting phone for student $id<br>";
+    $phone = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT PhoneNumber FROM student WHERE StudentId=$id"));
     $sms = $client->account->messages->sendMessage($twilioPhone, $phone, "Sup! You owe Jimmy Wei \$20! :)");
-    echo "Sent message to student $id at $phone\n";
+    echo "Sent message to student $id at $phone<br>";
   }
 

@@ -44,4 +44,4 @@ $classId = $_GET['ClassId'];
     echo "Sent message to student $id at $email['Email']<br>";
   }
 
- }
+ 

@@ -25,7 +25,6 @@
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		echo TRUE;
-		http_status_code(202);
 		exit(1);
 	}
 	
@@ -46,7 +45,6 @@
 		$result->free();
 		// CLOSE CONNECTION
 		$mysqli->close();
-		http_status_code(406);
 		exit(1);
 		return;
 	}
@@ -68,7 +66,6 @@
 		$result->free();
 		// CLOSE CONNECTION
 		$mysqli->close();
-		http_status_code(406);
 		exit(1);
 		return;
 	}
@@ -97,14 +94,12 @@
 		$result->free();
 		// CLOSE CONNECTION
 		$mysqli->close();
-		http_status_code(202);
 		exit(0);
 	}
 	   
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	http_status_code(406);
 	exit(0);
   }
 
@@ -120,7 +115,6 @@
 		}
 		$str = implode (",", $rows);
 		echo $str;
-		http_status_code(202);
 		$result->free();
 	 	// CLOSE CONNECTION
 	 	$mysqli->close();
@@ -131,7 +125,6 @@
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	http_status_code(406);
 	exit(1);
 	return;
   }
@@ -144,7 +137,6 @@
 	if($result==TRUE){
 		$row = mysqli_fetch_array($result, MYSQLI_NUM);
 		echo $row[0];
-		http_status_code(202);
 		$result->free();
 	 	// CLOSE CONNECTION
 	 	$mysqli->close();
@@ -155,7 +147,6 @@
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	http_status_code(406);
 	exit(1);
 	return;
   }
@@ -172,7 +163,6 @@
 		$result->free();
 		// CLOSE CONNECTION
 		$mysqli->close();
-		http_status_code(406);
 		exit(1);
 		return;
 	}
@@ -188,13 +178,11 @@
 		}
 		$str = implode (",", $rows);
 		echo $str;
-		http_status_code(202);
 	}
 	   
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	http_status_code(406);
 	exit(1);
 	return;
   }
@@ -218,7 +206,6 @@
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	http_status_code(406);
 	exit(1);
 	return;
   }
@@ -231,13 +218,11 @@
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		echo 'True';
-		http_status_code(202);
 	}
 	   
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	http_status_code(406);
 	exit(1);
 	return;
   }
@@ -262,7 +247,6 @@
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	http_status_code(406);
 	exit(1);
 	return;
   }
@@ -287,7 +271,6 @@
 	$result->free();
 	// CLOSE CONNECTION
 	$mysqli->close();
-	http_status_code(406);
 	exit(1);
 	return;
   }

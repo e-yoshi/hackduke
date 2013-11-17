@@ -16,7 +16,8 @@
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber = '{$std_phone}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
 		$std_id = $result['StudentId'];
-		echo $std_id;
+		var_dump($std_id);
+
 		$result->free();
 	} elseif (isset($_GET['Email'])){
 		//SendGrid
@@ -24,7 +25,7 @@
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.Email = '{$std_email}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
 		$std_id = $result['StudentId'];
-		echo $std_id;
+		var_dump($std_id);
 		$result->free();
 	} else{
 		//Bad request
@@ -33,7 +34,7 @@
 	}	
 	$query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' WHERE classlog.StudentId = '{$std_id}' FROM hackdukedatabase.classlog ORDER BY TimeStarted DESC LIMIT 1";
 	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	var_dump(result);
+	var_dump($result);
 	if($result==TRUE){
 		http_status_code(202);
 		exit(1);

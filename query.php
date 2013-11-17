@@ -92,7 +92,7 @@
   // GetStudents: returns comma separated student ids given a class id
   if ($queryType == 'GetStudents') {
 	  $class_id = @$_GET['ClassId'];
-	$query = "SELECT class.StudentId FROM hackdukedatabase.class WHERE TeacherName='{$class_id}'";
+	$query = "SELECT class.StudentId FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		$row = mysqli_fetch_array($result, MYSQLI_NUM);

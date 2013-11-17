@@ -58,8 +58,3 @@
   }
 ?>
 
-<Response>
-  <Message>
-    <?php echo $messageResponse ?>
-  </Message>
-</Response>

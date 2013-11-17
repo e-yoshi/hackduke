@@ -3,7 +3,7 @@
   	require_once ('db.php');
 
   // vars
-  $queryType = @$_GET['Query'];
+  $queryType = @$_POST['Query'];
 
   // TestConnection: used by ppt plugin to see if can connect
   if ($queryType == 'TestConnection') {
@@ -13,13 +13,13 @@
 
   // CreateQuestion: populates db with class info and sends texts/emails
   if($queryType == 'CreateQuiz') {
-    $class_id = @$_GET['ClassId'];
-	$teacher_name = @$_GET['TeacherName'];
-	$teacher_email = @$_GET['TeacherEmail'];
-	$teacher_password= @$_GET['TeacherPassword'];
+    $class_id = @$_POST['ClassId'];
+	$teacher_name = @$_POST['TeacherName'];
+	$teacher_email = @$_POST['TeacherEmail'];
+	$teacher_password= @$_POST['TeacherPassword'];
 	//Authenticate....
-   	$quiz_title = @$_GET['Title'];
-    $question = @$_GET['Question'];
+   	$quiz_title = @$_POST['Title'];
+    $question = @$_POST['Question'];
 	
 	$query = "INSERT INTO quiz Title, Question, ClassId VALUES '{$quiz_title}', '{$question}', '{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
@@ -37,7 +37,7 @@
   
   //OpenQuiz
   if($queryType == 'OpenQuiz') {
-	$class_id = @$_GET['ClassId'];
+	$class_id = @$_POST['ClassId'];
 	$query = "SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
@@ -83,7 +83,7 @@
   
   // GetResponse: returns comma separated student responses
   if ($queryType == 'GetResponse') {
-	  $classId = @$_GET['ClassId'];
+	  $classId = @$_POST['ClassId'];
 	$query = "SELECT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' ORDER BY AddedOn DESC LIMIT 1";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
@@ -112,7 +112,7 @@
 
   // GetClasses: returns comma separated class ids from teacher name
   if ($queryType == 'GetClasses') {
-	$teacher_name = @$_GET['TeacherName'];
+	$teacher_name = @$_POST['TeacherName'];
 	$query = "SELECT class.ClassId FROM hackdukedatabase.class WHERE TeacherName='{$teacher_name}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
@@ -140,7 +140,7 @@
 
   // GetStudents: returns comma separated student ids given a class id
   if ($queryType == 'GetStudents') {
-	$class_id = @$_GET['ClassId'];
+	$class_id = @$_POST['ClassId'];
 	$query = "SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
@@ -165,7 +165,7 @@
   
   // GetStudents: returns comma separated student ids given a class id
   if ($queryType == 'GetStudentsWithNames') {	  
-	   $class_id = @$_GET['ClassId'];
+	   $class_id = @$_POST['ClassId'];
 	$query = "SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
@@ -202,10 +202,10 @@
   }
   
   if ($queryType == 'MakeStudent') {
-	$std_first_name =  @$_GET['FirstName'];
-	$std_last_name =  @$_GET['LastName'];
-	$std_email =  @$_GET['Email'];
-	$std_phone =  @$_GET['Phone'];
+	$std_first_name =  @$_POST['FirstName'];
+	$std_last_name =  @$_POST['LastName'];
+	$std_email =  @$_POST['Email'];
+	$std_phone =  @$_POST['Phone'];
 	$query = "INSERT INTO hackdukedatabase.student (FirstName, LastName, Email, PhoneNumber) VALUES ('{$std_first_name}', '{$std_last_name}', '{$std_email}', '{$std_phone}')";
    	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
@@ -227,8 +227,8 @@
   
    // SetStudents: takes in comma separated list of student ids and updates student list for given class id
   if ($queryType == 'SetStudents') {
-	$class_id = @$_GET['ClassId'];
-	$std_list = @$_GET['List'];
+	$class_id = @$_POST['ClassId'];
+	$std_list = @$_POST['List'];
 	$query = "UPDATE hackdukedatabase.class SET class.StudentIds='{$std_list}' WHERE ClassId='{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
@@ -246,10 +246,10 @@
 
   // SetClasses: takes in comma separated list of class ids and reconciles classes in class table with list
   if ($queryType == 'SetClass') {
-	$class_id = @$_GET['ClassId'];
-	$teacher_name = @$_GET['TeacherName'];
-	$teacher_email = @$_GET['TeacherEmail'];
-	$teacher_password= @$_GET['TeacherPassword'];
+	$class_id = @$_POST['ClassId'];
+	$teacher_name = @$_POST['TeacherName'];
+	$teacher_email = @$_POST['TeacherEmail'];
+	$teacher_password= @$_POST['TeacherPassword'];
 	$query = "UPDATE hackdukedatabase.class SET TeacherName='{$teacher_name}', TeacherEmail='{$teacher_email}', TeacherPassword='{$teacher_password}' WHERE ClassId='{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
@@ -271,10 +271,10 @@
   
   // MakeClass creates a class
   if ($queryType == 'MakeClass') {
-	$class_id = @$_GET['ClassId'];
-	$teacher_name = @$_GET['TeacherName'];
-	$teacher_email = @$_GET['TeacherEmail'];
-	$teacher_password= @$_GET['TeacherPassword'];
+	$class_id = @$_POST['ClassId'];
+	$teacher_name = @$_POST['TeacherName'];
+	$teacher_email = @$_POST['TeacherEmail'];
+	$teacher_password= @$_POST['TeacherPassword'];
 	$query = "INSERT INTO hackdukedatabase.class (TeacherName, TeacherEmail, TeacherPassword) VALUES ('{$teacher_name}', '{$teacher_email}', '{$teacher_password}')";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){

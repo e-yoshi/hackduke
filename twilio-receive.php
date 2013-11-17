@@ -1,9 +1,9 @@
 <?php
 ini_set('display_errors', E_ALL);
 error_reporting(E_ALL);  
-
-  // require httprequest library
-  require("http-request-1.4.4/Request.php");
+  
+  // require pecl
+  
 
   // db vars
   $dbHost = "us-cdbr-azure-west-b.cleardb.com";
@@ -28,20 +28,12 @@ error_reporting(E_ALL);
   }
   $studentId = mysqli_fetch_array($result)['StudentId'];
 
-  echo "Creating request<br>";
+  echo "Sending request<br>";
 
-  try {
-    $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body");
-    echo "Sending request<br>";
-    //$response = $request->send();
-    echo "Request sent to $request->getUrl()<br>";
-    //$responseCode = $response->getResponseCode();
-    echo "Got HTTP response: $responseCode<br>";
-    //$messageResponse = "Got response code: $responseCode.";
-  } catch (Exception $e) {
-    echo $e;
-    $messageResponse = $e;
-  }
+  http_get("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body", array(), $responseInfo);
+  $responseCode = $responseInfo['response_code']; 
+  echo "Got HTTP response: $responseCode<br>";
+  $messageResponse = "Got HTTP response: $responseCode";
 
   exit();
   

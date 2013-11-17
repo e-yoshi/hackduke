@@ -1,4 +1,4 @@
-?php
+<?php
 
 require "sendgrid-php/SendGrid_loader.php";
 require "unirest-php-master/lib/Unirest.php";

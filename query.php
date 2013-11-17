@@ -84,9 +84,6 @@
   // GetResponse: returns comma separated student responses
   if ($queryType == 'GetResponse') {
 	$classId = @$_POST['ClassId'];
-	$query = "DELETE FROM hackdukedatabase.response";
-	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	$result->free();
 	$query = "SELECT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' GROUP BY response.StudentId ORDER BY response.AddedOn DESC";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if(!is_null($result)){

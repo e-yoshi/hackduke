@@ -13,8 +13,8 @@ ini_set('display_errors', '1');
   $dbName = "hackdukedatabase";
 
  // email vars
-  $from = $REQUEST['From'];
-  $body = $REQUEST['Text'];
+  $from = $_REQUEST['from'];
+  $body = $_REQUEST['text'];
  
   // get student from db
   $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);

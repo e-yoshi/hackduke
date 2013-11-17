@@ -2,8 +2,7 @@
 ini_set('display_errors', E_ALL);
 error_reporting(E_ALL);  
   
-  // require pecl
-  
+  require_once('db.php');
 
   // db vars
   $dbHost = "us-cdbr-azure-west-b.cleardb.com";
@@ -18,7 +17,7 @@ error_reporting(E_ALL);
   // get student from db
   $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
   if (mysqli_connect_errno($mysqlCon)) {
-    $responseMessage = "Sorry, an error occurred in storing your response :(";
+    $messageResponse= "Sorry, an error occurred in storing your response :(";
     exit("Error connecting to db");
   }
   $fromNormalized = substr($from, 2);
@@ -26,17 +25,26 @@ error_reporting(E_ALL);
   if ($result == NULL) {
     exit("Received message from non-registered number");
   }
-  $studentId = mysqli_fetch_array($result)['StudentId'];
-
-  echo "Sending request<br>";
-
-  http_get("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body", array(), $responseInfo);
-  $responseCode = $responseInfo['response_code']; 
-  echo "Got HTTP response: $responseCode<br>";
-  $messageResponse = "Got HTTP response: $responseCode";
-
-  exit();
   
+  $std_resp = filter_var($body, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+  $std_phone = filter_var($from, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+  $query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber='{$std_phone}'";
+  $result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
+  $rows = $result->fetch_array(MYSQLI_NUM);
+  $std_id = $rows[0];
+  $result->free();
+  if (!is_null($std_id)) {
+    $query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' FROM hackdukedatabase.classlog WHERE classlog.StudentId='{$std_id}' ORDER BY TimeStarted DESC LIMIT 1";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+    if ($result==TRUE) {
+      $messageResponse = "Successfully saved your response to the db! Response was: $body";  
+    }
+  } 	
+
+  $result->free();
+
+  // CLOSE CONNECTION
+  $mysqli->close();	
 ?>
 
 <Response>

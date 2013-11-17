@@ -146,7 +146,7 @@
 	$std_last_name =  @$_GET['LastName'];
 	$std_email =  @$_GET['Email'];
 	$std_phone =  @$_GET['Phone'];
-	$query = "INSERT INTO hackdukedatabase.student (FirstName, LastName, Email, Phone) VALUES ('{$std_first_name}', '{$std_last_name}', '{$std_email}', '{$std_phone}')";
+	$query = "INSERT INTO hackdukedatabase.student (FirstName, LastName, Email, PhoneNumber) VALUES ('{$std_first_name}', '{$std_last_name}', '{$std_email}', '{$std_phone}')";
    	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		echo 'True';

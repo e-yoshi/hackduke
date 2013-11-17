@@ -25,14 +25,14 @@
 	if(isset($_GET['Phone'])){
 		//Comes from twillio
 		$std_num = filter_var(@$_GET['Phone'], FILTER_SANITIZE_NUMBER_INT);
-		$query = "INSERT INTO response (StudentId, ClassId, Response) SELECT student.StudentId, '{$class_id}', '{$std_resp}' FROM hackdukedatabase.student WHERE student.PhoneNumber = {$std_num}";
+		$query = "INSERT INTO response (StudentId, ClassId, Response) SELECT student.StudentId, '{$class_id}', '{$std_resp}' FROM hackdukedatabase.student WHERE student.PhoneNumber = '{$std_num}'";
 
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 		
 	} elseif (isset($_GET['Email'])){
 		//SendGrid
 		$std_email = filter_var(@$_GET['Email'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-		$query = "INSERT INTO response (StudentId, ClassId, Response) SELECT student.StudentId, '{$class_id}', '{$std_resp}' FROM hackdukedatabase.student WHERE student.Email = {$std_email}";
+		$query = "INSERT INTO response (StudentId, ClassId, Response) SELECT student.StudentId, '{$class_id}', '{$std_resp}' FROM hackdukedatabase.student WHERE student.Email = '{$std_email}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 
 	} else{

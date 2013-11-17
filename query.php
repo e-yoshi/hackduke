@@ -3,7 +3,7 @@
   	require_once ('db.php');
 
   // vars
-  $queryType = @$_POST['Query'];
+  $queryType = @$_GET['Query'];
 
   // TestConnection: used by ppt plugin to see if can connect
   if ($queryType == 'TestConnection') {

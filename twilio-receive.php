@@ -27,7 +27,7 @@
 
   $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body", HttpRequest::METH_GET);
   try {
-    echo "Sending request<br>"
+    echo "Sending request<br>";
     $response = $request->send();
     echo "Request sent to $request->getUrl()<br>";
     $responseCode = $response->getResponseCode();

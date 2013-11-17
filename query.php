@@ -3,7 +3,7 @@
   $queryType = $_POST['Query'];
 
   if ($queryType == 'TestConnection') {
-    echo "TRUE";
+    echo TRUE;
   }
 
   if($_POST['Query']=='CreateQuestion') {

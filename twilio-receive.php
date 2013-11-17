@@ -25,7 +25,7 @@
 
   echo "Creating request<br>";
 
-  $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body", HttpRequest::METH_GET);
+  $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$fromNormalized&Response=$body");
   try {
     echo "Sending request<br>";
     $response = $request->send();

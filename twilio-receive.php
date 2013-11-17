@@ -1,6 +1,7 @@
 <?php
-ini_set('display_errors', E_ALL);
 error_reporting(E_ALL);  
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 'on');
   
   // db vars
   $dbHost = "us-cdbr-azure-west-b.cleardb.com";

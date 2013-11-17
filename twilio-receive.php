@@ -43,7 +43,6 @@ error_reporting(E_ALL);
   }	
 	$result->free();
 	$mysqlCon->close();
-	exit(0);
 ?>
 
 <Response>

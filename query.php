@@ -179,7 +179,6 @@
 	$std_list = @$_GET['List'];
 	$query = "UPDATE hackdukedatabase.class SET class.StudentIds='{$std_list}' WHERE ClassId='{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	var_dump("result");
 	if($result==TRUE){
 		echo 'True';
 		http_status_code(202);

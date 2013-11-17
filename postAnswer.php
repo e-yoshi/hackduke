@@ -40,6 +40,9 @@
 		exit(406);
 	}	
 	
+	if($result==TRUE){
+		exit(202);
+	}
 /*
 // A QUICK QUERY ON A FAKE USER TABLE
 	$query = "SELECT * FROM `users` WHERE `status`='bonkers'";

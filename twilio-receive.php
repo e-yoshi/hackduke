@@ -22,6 +22,17 @@
     exit("Received message from non-registered number");
   }
   $studentId = mysqli_fetch_array($result)['StudentId'];
+
+  $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer/php?Phone=$from&Response=$body", HttpRequest::METH_GET);
+  try {
+    $request->send();
+  } catch (HttpException $e) {
+    echo $e;
+    $messageResponse = $e;
+  }
+
+  exit();
+  
   $responseExists = mysqli_query($mysqlCon, "SELECT Response FROM response WHERE StudentId=$studentId") != NULL;
   if ($responseExists) {
     $success = mysqli_query($mysqlCon, "UPDATE response SET Response=\"$body\" WHERE StudentId=$studentId");

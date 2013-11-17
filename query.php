@@ -3,7 +3,7 @@
   	require_once ('db.php');
 
   // vars
-  $queryType = $_GET['Query'];
+  $queryType = @$_GET['Query'];
 
   // TestConnection: used by ppt plugin to see if can connect
   if ($queryType == 'TestConnection') {
@@ -46,7 +46,7 @@
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		$rows = $result->fetch_array(MYSQLI_NUM);
-		echo implode (", ", $rows);;
+		echo implode (", ", $rows);
 		http_status_code(202);
 		exit(1);
 	}

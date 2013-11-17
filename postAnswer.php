@@ -5,11 +5,11 @@
 	$DB_USER = 'bcd4a2c313611e';
 	$DB_PASS = '886d7131';
 	
-	$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+	$mysqli = @new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 	//Write student answer to database
 
-	if ($mysqli->connect_errno()) {
-		printf("Connect failed: %s\n", mysqli_connect_error());
+	if ($mysqli->connect_error) {
+		printf("Connect failed: %s\n", $mysqli->connect_error);
 		exit();
 	}
 	

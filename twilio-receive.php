@@ -12,7 +12,7 @@ ini_set('display_errors', 'on');
   // msg vars
   $from = $_REQUEST['From'];
   $body = $_REQUEST['Body'];
-  
+  echo 'test';
   // get student from db
   $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
   if (mysqli_connect_errno($mysqlCon)) {
@@ -32,20 +32,15 @@ ini_set('display_errors', 'on');
   $rows = mysqli_fetch_array($result);
   $std_id = $rows[0];
 
-    echo 'test0';
   if (!is_null($std_id)) {
-    echo 'test1';
     $query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' FROM hackdukedatabase.classlog WHERE classlog.StudentId='{$std_id}' ORDER BY TimeStarted DESC LIMIT 1";
     $result = mysqli_query($mysqlCon, $query);
     if ($result == TRUE) {
-    echo 'test2';
       $messageResponse = "Successfully saved your response to the db! Response was: $body";
     } else {
-    echo 'test3';
       $messageResponse = "Could not update the db :(";
     }
   } else {
-    echo 'test4';
     $messageResponse = "Could not find student id for phone number";
   }	
 

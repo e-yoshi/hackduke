@@ -1,0 +1,12 @@
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\bin\Debug\PPTPlugin.dll
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\bin\Debug\PPTPlugin.pdb
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\bin\Debug\PPTPlugin.dll.manifest
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\bin\Debug\PPTPlugin.vsto
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\obj\Debug\PPTPlugin.csprojResolveAssemblyReference.cache
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\obj\Debug\PPTPlugin.Properties.Resources.resources
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\obj\Debug\PPTPlugin.csproj.GenerateResource.Cache
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\obj\Debug\PPTPlugin.dll
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\obj\Debug\PPTPlugin.pdb
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\obj\Debug\PPTPlugin.InquizioRibbon.resources

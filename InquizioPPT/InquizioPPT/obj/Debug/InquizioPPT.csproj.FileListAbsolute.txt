@@ -1,0 +1,16 @@
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\obj\Debug\InquizioPPT.InquizioRibbon.resources
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\obj\Debug\PPTPlugin.Properties.Resources.resources
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\PPTPlugin\PPTPlugin\obj\Debug\InquizioPPT.csproj.GenerateResource.Cache
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\bin\Debug\InquizioPPT.dll
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\bin\Debug\InquizioPPT.pdb
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\bin\Debug\InquizioPPT.dll.manifest
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\bin\Debug\InquizioPPT.vsto
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\obj\Debug\InquizioPPT.InquizioRibbon.resources
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\obj\Debug\InquizioPPT.Properties.Resources.resources
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\obj\Debug\InquizioPPT.csproj.GenerateResource.Cache
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\obj\Debug\InquizioPPT.dll
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\obj\Debug\InquizioPPT.pdb
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\obj\Debug\InquizioPPT.csprojResolveAssemblyReference.cache
+C:\Users\matt\SkyDrive\Code\hackathon\hackduke13\InquizioPPT\InquizioPPT\obj\Debug\InquizioPPT.EditClass.resources

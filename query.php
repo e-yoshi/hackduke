@@ -98,7 +98,7 @@
 		// CLOSE CONNECTION
 		$mysqli->close();
 		http_status_code(202);
-		exit(1);
+		exit();
 		return;
 	}
 	   
@@ -106,7 +106,7 @@
 	// CLOSE CONNECTION
 	$mysqli->close();
 	http_status_code(406);
-	exit(1);
+	exit();
 	return;
   }
 

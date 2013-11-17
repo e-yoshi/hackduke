@@ -37,7 +37,6 @@ error_reporting(E_ALL);
   //$question = @$_POST['Question'];
   //$query = "INSERT INTO quiz (Question, ClassId) VALUES ('$question', '$classId')";
   //$result = mysqli_query($mysqlCon, $query);
-  //$result->free();
   $query = "DELETE FROM hackdukedatabase.response";
   $result = mysqli_query($mysqlCon, $query);
 

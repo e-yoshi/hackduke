@@ -11,15 +11,19 @@ ini_set('display_errors', '1');
  $user = 'azure_0c3c5610525389e9875c7eda6e42678a@azure.com';
  $pass = '7rjwkvyt';
 
+
 $to = array(
       'xurui203@gmail.com',
       'jcw46@duke.edu',
 	  'elder.yoshida@gmail.com'
  );
+ 
+ foreach ($to as $address){
+	  
  $params = array(
       'api_user' => $user,
       'api_key' => $pass,
-      'to' => $to,
+      'to' => $address,
 	  'subject' => 'First round test',
       'html' => 'hihihi',
       'text' => 'hihihi',
@@ -47,3 +51,4 @@ $to = array(
 
  // print everything out
  print_r($response);
+ }

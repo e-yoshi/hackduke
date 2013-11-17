@@ -36,13 +36,14 @@
 	if(!is_null($std_id)){
 	$query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' FROM hackdukedatabase.classlog WHERE classlog.StudentId='{$std_id}' ORDER BY TimeStarted DESC LIMIT 1";
 	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	}
-	if($result==TRUE){
-		http_status_code(202);
-		exit(1);
-	}
-	
+		if($result==TRUE){
+			http_status_code(202);
+			exit(1);
+		}
+	} 	
 	$result->free();
 	// CLOSE CONNECTION
-	$mysqli->close();		
+	$mysqli->close();	
+	http_status_code(406);
+	exit(1);	
 ?>

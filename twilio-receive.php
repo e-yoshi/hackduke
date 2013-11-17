@@ -33,7 +33,7 @@ error_reporting(E_ALL);
   if (!is_null($std_id)) {
     $query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' FROM hackdukedatabase.classlog WHERE classlog.StudentId='{$std_id}' ORDER BY TimeStarted DESC LIMIT 1";
     $result = mysqli_query($mysqlCon, $query);
-    if (!is_null($result)) {
+    if ($result == TRUE)) {
       $messageResponse = "Successfully saved your response to the db! Response was: $body";
     } else {
       $messageResponse = "Could not update the db :(";

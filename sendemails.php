@@ -9,6 +9,7 @@ $mail = new SendGrid\Mail();
 echo "new sendgrid mail created";
 $mail->
   addTo('xurui203@gmail.com')->
+  addTo('nick@sendgrid.com')->
   setFrom('xurui203@gmail.com')->
   setSubject('Payment')->
   setText('Here is your $20!')->

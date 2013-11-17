@@ -25,7 +25,9 @@
 
   $request = new HttpRequest("http://hackduke.azurewebsites.net/postAnswer.php?Phone=$from&Response=$body", HttpRequest::METH_GET);
   try {
-    $request->send();
+    $response = $request->send();
+    $responseCode = $response->getResponseCode();
+    $messageResponse = "Got responsen code $responseCode.";
   } catch (HttpException $e) {
     echo $e;
     $messageResponse = $e;

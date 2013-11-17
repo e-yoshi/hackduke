@@ -26,22 +26,17 @@
   if ($responseExists) {
     $success = mysqli_query($mysqlCon, "UPDATE response SET Response=$body WHERE StudentId=$studentId");
     if ($success) {
-      $messageResponse = "Successfully updated your response in db!";
+      $messageResponse = "Successfully updated your response in db! Response was: $body";
     } else {
       $messageResponse = "Failed to update your response in db :(";
     }
   } else {
     $success = mysqli_query($mysqlCon, "INSERT INTO response (StudentId, Response) VALUES ($studentId, $body)");
     if ($success) {
-      $messageResponse = "Successfully created your response in db!";
+      $messageResponse = "Successfully created your response in db! Response was: $body";
     } else {
       $messageResponse = "Failed to create your response in db :(";
     }
-  }
-  if ($success) {
-    $messageResponse = "Thanks, we received your response of: $body";
-  } else {
-    $messageResponse = "Sorry, an error occurred in storing your response :(";
   }
 ?>
 

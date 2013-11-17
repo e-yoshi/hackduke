@@ -1,6 +1,6 @@
 <?php
 
-$fh = fopen('~/parse.log', 'a+');
+$fh = fopen('/tmp/parse.log', 'a+');
 if ( $fh )
 {
 	fwrite($fh, print_r($_POST, true) . print_r($_FILES, true));

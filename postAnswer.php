@@ -16,6 +16,7 @@
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber = '{$std_phone}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
 		$std_id = $result['student.StudentId'];
+		echo $std_id;
 		$result->free();
 	} elseif (isset($_GET['Email'])){
 		//SendGrid
@@ -23,6 +24,7 @@
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.Email = '{$std_email}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
 		$std_id = $result['student.StudentId'];
+		echo $std_id;
 		$result->free();
 	} else{
 		//Bad request

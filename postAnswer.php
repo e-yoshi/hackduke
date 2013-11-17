@@ -13,7 +13,7 @@
 	if(isset($_GET['Phone'])){
 		//Comes from twillio
 		$std_phone = filter_var($_GET['Phone'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber = '{$std_phone}'";
+		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber = '9195368440'";
 		$std_id = $mysqli->query($query) or die($mysqli->error.__LINE__);		
 		var_dump($std_id);
 		$std_id->free();

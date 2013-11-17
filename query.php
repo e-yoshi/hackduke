@@ -45,9 +45,8 @@
 	$query = "SELECT class.ClassId FROM hackdukedatabase.class WHERE TeacherName='{$teacher_name}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
-		$rows=NULL;
 		while ($row = mysql_fetch_assoc($result)) {
-			$rows->push($row[0]);
+			$rows->push($row);
 		}
 		var_dump($rows);
 		$str = implode (", ", $rows);

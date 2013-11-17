@@ -4,6 +4,8 @@ ini_set('display_errors', '1');
 
 include 'unirest-php-master/lib/Unirest.php';
 include 'sendgrid-php/lib/SendGrid.php';
+SendGrid::register_autoloader();
+
 $sendgrid = new SendGrid('azure_0c3c5610525389e9875c7eda6e42678a@azure.com', '7rjwkvyt');
 $mail = new SendGrid\Email();
 echo "new sendgrid mail created";

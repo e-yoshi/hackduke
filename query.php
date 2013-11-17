@@ -96,9 +96,7 @@
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		$row = mysqli_fetch_array($result, MYSQLI_NUM);
-		var_dump($row);
-		$str = implode (",", $row[0]);
-		echo $str;
+		echo $row[0];
 		http_status_code(202);
 		$result->free();
 	 	// CLOSE CONNECTION

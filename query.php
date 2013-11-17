@@ -86,7 +86,7 @@
 	$classId = @$_GET['ClassId'];
 	$query = "SELECT DISTINCT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' ORDER BY AddedOn DESC";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	if($result==TRUE){
+	if($result != NULL){
 		$rows = array();
 		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 			 array_push($rows, $row[1]);

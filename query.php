@@ -36,7 +36,7 @@
 
   // GetResponse: returns comma separated student responses
   if ($queryType == 'GetResponse') {
-	  $teacher_name = @$_GET['ClassId'];
+	  $classId = @$_GET['ClassId'];
 	$query = "SELECT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){

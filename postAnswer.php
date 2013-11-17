@@ -16,6 +16,7 @@
 		$query = "SELECT student.StudentId FROM hackdukedatabase.student WHERE student.PhoneNumber = '{$std_phone}'";
 		$result = $mysqli->query($query) or die($mysqli->error.__LINE__);		
 		$std_id = $result['StudentId'];
+		var_dump($result);
 		var_dump($std_id);
 
 		$result->free();

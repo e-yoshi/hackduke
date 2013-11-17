@@ -1,4 +1,9 @@
 <?php
+
+require "sendgrid-php/SendGrid_loader.php";
+require "unirest-php-master/lib/Unirest.php";
+
+
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 

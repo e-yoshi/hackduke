@@ -86,7 +86,7 @@
 	$classId = @$_GET['ClassId'];
 	$query = "SELECT DISTINCT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' ORDER BY AddedOn DESC";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	if($result != NULL){
+	if(!is_null($result)){
 		$rows = array();
 		while (($row = mysqli_fetch_array($result, MYSQLI_NUM)) != NULL) {
 			 array_push($rows, $row[1]);
@@ -99,7 +99,6 @@
 		$mysqli->close();
 		http_status_code(202);
 		exit(0);
-		return;
 	}
 	   
 	$result->free();
@@ -107,7 +106,6 @@
 	$mysqli->close();
 	http_status_code(406);
 	exit(0);
-	return;
   }
 
   // GetClasses: returns comma separated class ids from teacher name

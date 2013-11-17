@@ -51,7 +51,6 @@ error_reporting(E_ALL);
     $phone = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT PhoneNumber FROM student WHERE StudentId='{$id}'"));
     $phoneNumber = $phone['PhoneNumber'];
     $sms = $client->account->messages->sendMessage($twilioPhone, $phoneNumber, "Hello from Inquizio! Your instructor has requested a response; please reply to this text with the letter corresponding to your answer!");
-	@$phone->free();
     echo "Sent message to student $id at $phoneNumber<br>";
   }
   $mysqlCon->close();

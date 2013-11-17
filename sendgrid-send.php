@@ -26,7 +26,7 @@ $classId = $_GET['ClassId'];
   }
 
   // make query
-  $studentIds = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT StudentId FROM class WHERE ClassId=$classId"));
+  $studentIds = mysqli_fetch_array(mysqli_query($mysqlCon, "SELECT StudentIds FROM class WHERE ClassId=$classId"));
   if ($studentIds == NULL) {
     exit("Class not found");
   }

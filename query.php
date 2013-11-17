@@ -130,7 +130,7 @@
 	}
 	   
 	$result->free();	  
-	$query = "SELECT student.StudentId, student.FirstName FROM hackdukedatabase.student WHERE student.StudentId IN '{$row[0]}')";
+	$query = "SELECT student.StudentId, student.FirstName FROM hackdukedatabase.student WHERE student.StudentId IN ({$row[0]})";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	var_dump($result);
 	if($result==TRUE){

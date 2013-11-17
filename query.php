@@ -12,7 +12,7 @@
   }
 
   // CreateQuestion: populates db with class info and sends texts/emails
-  if($queryType == 'CreateQuiz') {
+  if($queryType == 'CreateQuestion') {
     $class_id = @$_POST['ClassId'];
 	$teacher_name = @$_POST['TeacherName'];
 	$teacher_email = @$_POST['TeacherEmail'];

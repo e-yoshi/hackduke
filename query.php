@@ -118,6 +118,7 @@
 	  $class_id = @$_GET['ClassId'];
 	$query = "SELECT student.StudentId, student.FirstName FROM hackdukedatabase.student WHERE student.StudentId IN (SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}')";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	var_dump($result);
 	if($result==TRUE){
 		$rows = array();
 		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {

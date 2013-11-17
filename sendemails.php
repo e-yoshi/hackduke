@@ -4,7 +4,7 @@ $sendgrid = new SendGrid('azure_0c3c5610525389e9875c7eda6e42678a@azure.com', '7r
 $mail = new SendGrid\Mail();
 echo "new sendgrid mail created";
 $mail->
-  addTo('elder.yoshida@gmail.com')->
+  addTo('xurui203@gmail.com')->
   setFrom('xurui203@gmail.com')->
   setSubject('Payment')->
   setText('Here is your $20!')->

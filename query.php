@@ -132,12 +132,11 @@
 	$result->free();	  
 	$query = "SELECT student.StudentId, student.FirstName FROM hackdukedatabase.student WHERE student.StudentId IN ({$row[0]})";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	var_dump($result);
 	if($result==TRUE){
 		$rows = array();
 		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-			 array_push($rows, $row[1]);
 			 array_push($rows, $row[0]);
+			 array_push($rows, $row[1]);
 		}
 		$str = implode (",", $rows);
 		echo $str;

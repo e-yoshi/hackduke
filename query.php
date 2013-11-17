@@ -96,7 +96,7 @@
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		$row = mysqli_fetch_array($result, MYSQLI_NUM);
-		$str = implode (",", $row[]);
+		$str = implode (",", $row[0]);
 		echo $str;
 		http_status_code(202);
 		$result->free();

@@ -114,9 +114,23 @@
   
   
   // GetStudents: returns comma separated student ids given a class id
-  if ($queryType == 'GetStudentsWithNames') {
-	  $class_id = @$_GET['ClassId'];
-	$query = "SELECT student.StudentId, student.FirstName FROM hackdukedatabase.student WHERE student.StudentId IN (SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}')";
+  if ($queryType == 'GetStudentsWithNames') {	  
+	   $class_id = @$_GET['ClassId'];
+	$query = "SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		$row = mysqli_fetch_array($result, MYSQLI_NUM);
+	} else {
+		$result->free();
+		// CLOSE CONNECTION
+		$mysqli->close();
+		http_status_code(406);
+		exit(1);
+		return;
+	}
+	   
+	$result->free();	  
+	$query = "SELECT student.StudentId, student.FirstName FROM hackdukedatabase.student WHERE student.StudentId IN '{$row[0]}')";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	var_dump($result);
 	if($result==TRUE){

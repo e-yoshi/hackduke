@@ -3,7 +3,7 @@
   	require_once ('db.php');
 
   // vars
-  $queryType = @$_GET['Query'];
+  $queryType = @$_POST['Query'];
 
   // TestConnection: used by ppt plugin to see if can connect
   if ($queryType == 'TestConnection') {
@@ -83,10 +83,9 @@
   
   // GetResponse: returns comma separated student responses
   if ($queryType == 'GetResponse') {
-	$classId = @$_GET['ClassId'];
+	$classId = @$_POST['ClassId'];
 	$query = "SELECT DISTINCT response.Response, response.StudentId FROM hackdukedatabase.response WHERE ClassId ='{$classId}' ORDER BY AddedOn DESC";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	var_dump($result);
 	if($result==TRUE){
 		$rows = array();
 		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {

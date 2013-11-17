@@ -31,7 +31,7 @@
 	}	
 	$query = "INSERT INTO response (ClassId, StudentId, Response) SELECT classlog.ClassId, '{$std_id}', '{$std_resp}' WHERE classlog.StudentId = '{$std_id}' FROM hackdukedatabase.classlog ORDER BY TimeStarted DESC LIMIT 1";
 	$result = $mysqli->query($query) or die($mysqli->error.__LINE__);
-	
+	var_dump(result);
 	if($result==TRUE){
 		http_status_code(202);
 		exit(1);

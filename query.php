@@ -22,7 +22,7 @@
     $question = @$_POST['Question'];
         
 	$success = TRUE;	
-	$query = "INSERT INTO quiz Title, Question, ClassId VALUES '{$quiz_title}', '{$question}', '{$class_id}'";
+	$query = "INSERT INTO quiz (Title, Question, ClassId) VALUES ('{$quiz_title}', '{$question}', '{$class_id}')";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	$success = ($success && $result);
 	$query = "DELETE FROM response WHERE ClassId=$class_id";

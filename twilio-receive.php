@@ -1,8 +1,8 @@
 <?php
   // db vars
   $dbHost = "us-cdbr-azure-west-b.cleardb.com";
-  $dbUser = "bcd4a2c313611e";
-  $dbPass = "886d7131";
+  $dbUser = "b95acf3e9baf04";
+  $dbPass = "3c5f9044";
   $dbName = "hackdukedatabase";
 
   // msg vars

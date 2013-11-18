@@ -17,8 +17,8 @@ error_reporting(E_ALL);
   
   // connect to mysql db
   $dbHost = "us-cdbr-azure-west-b.cleardb.com";
-  $dbUser = "bcd4a2c313611e";
-  $dbPass = "886d7131";
+  $dbUser = "b95acf3e9baf04";
+  $dbPass = "3c5f9044";
   $dbName = "hackdukedatabase";
   $mysqlCon = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 

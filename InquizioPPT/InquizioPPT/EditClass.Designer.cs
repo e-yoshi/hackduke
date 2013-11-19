@@ -65,7 +65,7 @@
             this.addStudentBtn.Location = new System.Drawing.Point(612, -1);
             this.addStudentBtn.Name = "addStudentBtn";
             this.addStudentBtn.Size = new System.Drawing.Size(63, 24);
-            this.addStudentBtn.TabIndex = 8;
+            this.addStudentBtn.TabIndex = 5;
             this.addStudentBtn.Text = "Add";
             this.addStudentBtn.UseVisualStyleBackColor = false;
             // 
@@ -77,7 +77,7 @@
             this.studentFNameText.Location = new System.Drawing.Point(81, 0);
             this.studentFNameText.Name = "studentFNameText";
             this.studentFNameText.Size = new System.Drawing.Size(100, 23);
-            this.studentFNameText.TabIndex = 7;
+            this.studentFNameText.TabIndex = 1;
             // 
             // studentIDText
             // 
@@ -85,7 +85,7 @@
             this.studentIDText.Location = new System.Drawing.Point(0, 0);
             this.studentIDText.Name = "studentIDText";
             this.studentIDText.Size = new System.Drawing.Size(75, 23);
-            this.studentIDText.TabIndex = 6;
+            this.studentIDText.TabIndex = 0;
             // 
             // studentLNameText
             // 
@@ -96,7 +96,7 @@
             this.studentLNameText.Location = new System.Drawing.Point(187, 0);
             this.studentLNameText.Name = "studentLNameText";
             this.studentLNameText.Size = new System.Drawing.Size(101, 23);
-            this.studentLNameText.TabIndex = 10;
+            this.studentLNameText.TabIndex = 2;
             // 
             // studentPhoneText
             // 
@@ -108,7 +108,7 @@
             this.studentPhoneText.Name = "studentPhoneText";
             this.studentPhoneText.PromptChar = '…';
             this.studentPhoneText.Size = new System.Drawing.Size(100, 23);
-            this.studentPhoneText.TabIndex = 11;
+            this.studentPhoneText.TabIndex = 3;
             // 
             // studentEmailText
             // 
@@ -119,7 +119,7 @@
             this.studentEmailText.Location = new System.Drawing.Point(399, 0);
             this.studentEmailText.Name = "studentEmailText";
             this.studentEmailText.Size = new System.Drawing.Size(207, 23);
-            this.studentEmailText.TabIndex = 12;
+            this.studentEmailText.TabIndex = 4;
             // 
             // label5
             // 
@@ -129,7 +129,7 @@
             this.label5.Location = new System.Drawing.Point(410, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(42, 16);
-            this.label5.TabIndex = 17;
+            this.label5.TabIndex = 4;
             this.label5.Text = "Email";
             // 
             // label4
@@ -139,7 +139,7 @@
             this.label4.Location = new System.Drawing.Point(197, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 16);
-            this.label4.TabIndex = 16;
+            this.label4.TabIndex = 2;
             this.label4.Text = "Last Name";
             // 
             // label3
@@ -150,7 +150,7 @@
             this.label3.Location = new System.Drawing.Point(304, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(98, 16);
-            this.label3.TabIndex = 15;
+            this.label3.TabIndex = 3;
             this.label3.Text = "Phone Number";
             // 
             // label2
@@ -160,7 +160,7 @@
             this.label2.Location = new System.Drawing.Point(91, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 16);
-            this.label2.TabIndex = 14;
+            this.label2.TabIndex = 1;
             this.label2.Text = "First Name";
             // 
             // label1
@@ -170,7 +170,7 @@
             this.label1.Location = new System.Drawing.Point(7, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 16);
-            this.label1.TabIndex = 13;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Student ID";
             // 
             // EditClass

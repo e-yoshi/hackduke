@@ -77,14 +77,18 @@ namespace InquizioPPT
         void edClassBtn_Click(object sender, RibbonControlEventArgs e)
         {
             Dictionary<string, string> post = new Dictionary<string, string>();
-            post.Add("Query", "GetStudentsWithNames");
+            post.Add("Query", "GetStudentsInfo");
             post.Add("ClassId", CurrentClassID.ToString());
             var result = PostResponse(NetHost, post).Split(',');
 
             EditClass ed = new EditClass();
-            for (int i = 0; i < result.Length; i += 5)
+            for (int i = 0; i < result.Length && result.Length > (i / 5f) + 1; i += 5)
                 ed.CreateNewStudentEntry(result[i], result[i + 1], result[i + 2], result[i + 3], result[i + 4]);
             ed.ShowDialog();
+            post.Clear();
+            post.Add("Query", "SetStudentsInfo");
+            post.Add("StudentsInfo", ed.GetClassAsString());
+            PostResponse(NetHost, post);
         }
 
         /// <summary>

@@ -156,7 +156,7 @@
   
   
   // GetStudents: returns comma separated student information given a class id
-  if ($queryType == 'GetStudentsWithNames') {	  
+  if ($queryType == 'GetStudentsInfo') {	  
 	   $class_id = @$_POST['ClassId'];
 	$query = "SELECT class.StudentIds FROM hackdukedatabase.class WHERE ClassId='{$class_id}'";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
@@ -171,7 +171,39 @@
 	}
 	   
 	$result->free();	  
-	$query = "SELECT student.StudentId, student.FirstName, student.LastName, student.Email, student.PhoneNumber FROM hackdukedatabase.student WHERE student.StudentId IN ({$row[0]})";
+	$query = "SELECT student.StudentId, student.FirstName, student.LastName, student.PhoneNumber, student.Email FROM hackdukedatabase.student WHERE student.StudentId IN ({$row[0]})";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
+	if($result==TRUE){
+		$rows = array();
+		while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+			 array_push($rows, $row[0]);
+			 array_push($rows, $row[1]);
+		}
+		$str = implode (",", $rows);
+		echo $str;
+	}
+	   
+	$result->free();
+	// CLOSE CONNECTION
+	$mysqli->close();
+	exit(0);
+	return;
+  }
+  if ($queryType == 'SetStudentsInfo') {	  
+   $class_id = @$_POST['ClassId'];
+
+	$j = 0;
+	$post = implode(",", @$_POST['StudentsInfo']);
+	for ($i = 0; $i < count($row); $i++)
+	{
+		$std_id = @$post[$i];
+		$std_first_name =  @$post[$i + 1];
+		$std_last_name =  @$post[$i + 2];
+		$std_phone =  @$post[$i + 3];
+		$std_email =  @$post[$i + 4];
+		$j += 5;
+		$query .= "UPDATE student.StudentId={$std_id}, student.FirstName={$std_first_name}, student.LastName={$std_last_name}, student.PhoneNumber={$std_phone}, student.Email={$std_email} FROM hackdukedatabase.student WHERE student.StudentId='{$std_id}'";
+	}
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
 	if($result==TRUE){
 		$rows = array();

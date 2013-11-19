@@ -26,7 +26,7 @@ namespace InquizioPPT
             };
         }
 
-        string GetClassAsString()
+        public string GetClassAsString()
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0, n = 0; i < Controls.Count; i++)
@@ -35,7 +35,10 @@ namespace InquizioPPT
                     if (n++ > 0)
                         sb.Append(',');
                     sb.Append(Controls[i].Controls[0].Text + ',');
-                    sb.Append(Controls[i].Controls[1].Text);
+                    sb.Append(Controls[i].Controls[1].Text + ',');
+                    sb.Append(Controls[i].Controls[2].Text + ',');
+                    sb.Append(Controls[i].Controls[3].Text + ',');
+                    sb.Append(Controls[i].Controls[4].Text);
                 }
             return sb.ToString();
         }

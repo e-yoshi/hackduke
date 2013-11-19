@@ -82,8 +82,8 @@ namespace InquizioPPT
             var result = PostResponse(NetHost, post).Split(',');
 
             EditClass ed = new EditClass();
-            for (int i = 0; i < result.Length; i += 2)
-                ed.CreateNewStudentEntry(result[i], result[i + 1]);
+            for (int i = 0; i < result.Length; i += 5)
+                ed.CreateNewStudentEntry(result[i], result[i + 1], result[i + 2], result[i + 3], result[i + 4]);
             ed.ShowDialog();
         }
 

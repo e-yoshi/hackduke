@@ -15,7 +15,11 @@ namespace InquizioPPT
         public EditClass()
         {
             InitializeComponent();
-            addStudentBtn.Click += delegate { CreateNewStudentEntry(studentIDText.Text, studentNameText.Text); studentNameText.Text = studentIDText.Text = ""; };
+            addStudentBtn.Click += delegate
+            {
+                CreateNewStudentEntry(studentIDText.Text, studentFNameText.Text, studentLNameText.Text, studentPhoneText.Text, studentEmailText.Text);
+                studentFNameText.Text = studentIDText.Text = "";
+            };
             FormClosing += delegate
             {
                 System.Diagnostics.Debug.WriteLine(GetClassAsString());
@@ -26,7 +30,7 @@ namespace InquizioPPT
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0, n = 0; i < Controls.Count; i++)
-                if (Controls[i].Tag == "student")
+                if ((string)Controls[i].Tag == "student")
                 {
                     if (n++ > 0)
                         sb.Append(',');
@@ -36,7 +40,7 @@ namespace InquizioPPT
             return sb.ToString();
         }
 
-        public void CreateNewStudentEntry(string StudentID, string StudentName)
+        public void CreateNewStudentEntry(string StudentID, string StudentFName, string StudentLName, string StudentPhone, string StudentEmail)
         {
             Panel container = new Panel();
             container.Tag = "student";
@@ -45,15 +49,33 @@ namespace InquizioPPT
             TextBox newIDText = new TextBox();
             newIDText.Bounds = studentIDText.Bounds;
             newIDText.Text = StudentID;
-            TextBox newNameText = new TextBox();
-            newNameText.Bounds = studentNameText.Bounds;
-            newNameText.Text = StudentName;
+
+            TextBox newFNameText = new TextBox();
+            newFNameText.Bounds = studentFNameText.Bounds;
+            newFNameText.Text = StudentFName;
+
+            TextBox newLNameText = new TextBox();
+            newLNameText.Bounds = studentLNameText.Bounds;
+            newLNameText.Text = StudentLName;
+
+            MaskedTextBox newPhoneText = new MaskedTextBox();
+            newPhoneText.Bounds = studentPhoneText.Bounds;
+            newPhoneText.Mask = studentPhoneText.Mask;
+            newPhoneText.PromptChar = studentPhoneText.PromptChar;
+            newPhoneText.Text = StudentPhone;
+
+            TextBox newEmailText = new TextBox();
+            newEmailText.Bounds = studentEmailText.Bounds;
+            newEmailText.Text = StudentEmail;
+
             Button remBtn = new Button();
-            remBtn.BackColor = Color.Tomato; 
+            remBtn.BackColor = Color.Tomato;
+            remBtn.ForeColor = Color.White;
             remBtn.Bounds = addStudentBtn.Bounds;
             remBtn.Text = "Remove";
             remBtn.Click += remBtn_Click;
-            container.Controls.AddRange(new Control[] { newIDText, newNameText, remBtn });
+
+            container.Controls.AddRange(new Control[] { newIDText, newFNameText, newLNameText, newPhoneText, newEmailText, remBtn });
 
             addPanel.Top = container.Bottom + 10;
             Controls.Add(container);
